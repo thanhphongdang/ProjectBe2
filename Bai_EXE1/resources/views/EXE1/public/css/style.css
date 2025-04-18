@@ -1,0 +1,10 @@
+.container {
+  margin-top: 150px;
+  margin-bottom: 125px;
+}
+
+table > tr,
+th,
+td {
+  border: none !important;
+}
