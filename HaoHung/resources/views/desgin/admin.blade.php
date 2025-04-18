@@ -330,7 +330,7 @@
 										</div>
 									</li>
 									<li>
-										<a href="user-profile.html">
+										<a href="#">
 											<i class="mdi mdi-account"></i> My Profile
 										</a>
 									</li>

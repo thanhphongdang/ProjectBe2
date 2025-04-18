@@ -68,21 +68,21 @@ class CRUDController extends Controller
             'password' => 'required|min:6',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         // dd($request->all());
-    
+
         $data = $request->all();
-    
+
         $imageName = null;
-    
+
         // Nếu người dùng có upload avatar (tên input trong form là "image")
         if ($request->hasFile('image')) {
             // $image = $request->file('image');
             // dd($image);
-            $imageName =  time() . "_". $data["image"]->getClientOriginalName();
+            $imageName = time() . "_" . $data["image"]->getClientOriginalName();
             $data["image"]->move(public_path('image'), $imageName);
         }
-    
+
         // Tạo user
         $check = User::create([
             'name' => $data['name'],
@@ -92,7 +92,7 @@ class CRUDController extends Controller
             'password' => Hash::make($data['password']),
             'image' => $imageName, // Lưu tên file vào DB
         ]);
-    
+
         return redirect("login")->with('success', 'Đăng ký thành công!');
 
 
@@ -144,7 +144,7 @@ class CRUDController extends Controller
             'password' => 'nullable|min:6',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         $user = User::find($input['id']);
         // dd($user);
         if ($request->hasFile('image')) {
@@ -155,18 +155,18 @@ class CRUDController extends Controller
             $input["image"]->move(public_path('image'), $imageName);
             $user->image = $imageName;
         }
-        
+
         $user->name = $input['name'];
         $user->address = $input['address'];
         $user->phone = $input['phone'];
         $user->email = $input['email'];
-        
+
         if (!empty($input['password'])) {
             $user->password = Hash::make($input['password']);
         }
-        
+
         $user->save();
-        
+
         return redirect("user-list")->withSuccess('User updated successfully');
     }
     /*
@@ -210,11 +210,13 @@ class CRUDController extends Controller
         $users = User::all();
         return view('desgin.user-list', ['users' => $users]);
     }
-    public function Add(){
+    public function Add()
+    {
         return view('desgin.add-user');
     }
-     
-    public function postAdd(Request $request){
+
+    public function postAdd(Request $request)
+    {
 
         $request->validate([
             'name' => 'required',
@@ -222,21 +224,21 @@ class CRUDController extends Controller
             'password' => 'required|min:6',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         // dd($request->all());
-    
+
         $data = $request->all();
-    
+
         $imageName = null;
-    
+
         // Nếu người dùng có upload avatar (tên input trong form là "image")
         if ($request->hasFile('image')) {
             // $image = $request->file('image');
             // dd($image);
-            $imageName =  time() . "_". $data["image"]->getClientOriginalName();
+            $imageName = time() . "_" . $data["image"]->getClientOriginalName();
             $data["image"]->move(public_path('image'), $imageName);
         }
-        
+
         // Tạo user
         $check = User::create([
             'name' => $data['name'],
@@ -246,7 +248,19 @@ class CRUDController extends Controller
             'password' => Hash::make($data['password']),
             'image' => $imageName, // Lưu tên file vào DB
         ]);
-        
+
         return redirect("user-list")->with('success', 'Add suddessfully !');
     }
+
+    // public function Profile(Request $request)
+    // {
+    //     $user_role = auth()->user()->role;
+    //      dd($user_role);
+    //     if ($user_role == 1) {
+    //         $user = User::find($user_role);
+    //         $user = $request->all();
+    //         return view('desgin.profile-user', ['user' => $user]);
+    //     }
+    // }
+    
 }
