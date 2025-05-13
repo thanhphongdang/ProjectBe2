@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
-    return view('desgin.demo');
+    return view('demo');
 })->name('home');
 
 // Route::middleware(['auth', 'verified'])->group(function () {
@@ -15,6 +15,10 @@ Route::get('/', function () {
 //         return Inertia::render('dashboard');
 //     })->name('dashboard');
 // });
+
+Route::get('navbar',[CRUDController::class, 'navbar']);
+Route::get('footer',[CRUDController::class, 'footer']);
+Route::get('header',[CRUDController::class, 'header']);
 
 
 //Sign
@@ -35,9 +39,11 @@ Route::post('update', [CRUDController::class,'postUpdateUser'])->name('post.upda
 Route::get('add-user', [CRUDController::class,'Add'])->name('user.add');
 Route::post('add-user', [CRUDController::class,'postAdd'])->name('post.add');
 
+// Route::get('admin', [CRUDController::class,'header'])->name('helo');
+
 //Chi thong tin lay mot minh admin
 // Route::get('admin-user', [CRUDController::class,'Profile'])->name('admin');
-// Route::get('admin-user', [CRUDController::class,'profileAdmin'])->name('helo');
+Route::get('admin-user/{id?}', [CRUDController::class,'Profile'])->name('helo');
 
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';

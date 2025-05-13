@@ -34,11 +34,16 @@ class CRUDController extends Controller
 
         $credentials = $request->only('email', 'password');
 
+        $user = User::where('email', $request->email)->first();
+
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
             if ($user->role == 1) {
-                return redirect()->intended('admin')->withSuccess('Signed in as admin');
+                return redirect()->intended('admin')
+                    ->with('name', $user['name'])
+                    ->with('email', $user['email'])
+                    ->with('image', $user['image']);
             } else {
                 return redirect('demo')->withSuccess('Signed in as user');
             }
@@ -128,7 +133,7 @@ class CRUDController extends Controller
         $user_id = $request->get('id');
         $user = User::find($user_id);
 
-        return view('desgin.update-user', ['user' => $user]);
+        return view('page.edit-user', ['user' => $user]);
     }
 
     /**
@@ -202,17 +207,25 @@ class CRUDController extends Controller
 
     public function index()
     {
-        return view("desgin.admin");
+        return view("page.admin");
     }
 
     public function user_list(Request $request)
-    {
-        $users = User::all();
-        return view('desgin.user-list', ['users' => $users]);
-    }
+{
+    $users = User::all();
+    $user = Auth::user(); // Lấy user hiện tại đã đăng nhập
+
+    return view('page.user-list', [
+        'users' => $users,
+        'name'  => $user->name,
+        'email' => $user->email,
+        'image' => $user->image,
+    ]);
+}
+
     public function Add()
     {
-        return view('desgin.add-user');
+        return view('page.add-user');
     }
 
     public function postAdd(Request $request)
@@ -252,15 +265,24 @@ class CRUDController extends Controller
         return redirect("user-list")->with('success', 'Add suddessfully !');
     }
 
-    // public function Profile(Request $request)
-    // {
-    //     $user_role = auth()->user()->role;
-    //      dd($user_role);
-    //     if ($user_role == 1) {
-    //         $user = User::find($user_role);
-    //         $user = $request->all();
-    //         return view('desgin.profile-user', ['user' => $user]);
-    //     }
+    public function Profile($id)
+    {
+
+        $user = User::find($id);
+
+        $data = [
+            'user' => $user
+        ];
+        return view('page.profile-admin', $data);
+    }
+
+    // public function header($id) {
+
+    //     $user = User::find($id);
+
+    //     $data = [
+    //         'user' => $user
+    //     ];
+    //     return view('desgin.header', $data);
     // }
-    
 }
