@@ -45,7 +45,7 @@ class CRUDController extends Controller
                     ->with('email', $user['email'])
                     ->with('image', $user['image']);
             } else {
-                return redirect('demo')->withSuccess('Signed in as user');
+                return redirect('Index')->withSuccess('Signed in as user');
             }
         }
 
@@ -276,6 +276,7 @@ class CRUDController extends Controller
         return view('page.profile-admin', $data);
     }
 
+     
     // public function header($id) {
 
     //     $user = User::find($id);

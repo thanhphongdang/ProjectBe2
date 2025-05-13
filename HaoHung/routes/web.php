@@ -46,6 +46,7 @@ Route::post('add-user', [CRUDController::class,'postAdd'])->name('post.add');
 Route::get('admin-user/{id?}', [CRUDController::class,'Profile'])->name('helo');
 
 Route::get('add-product',[ProductController::class,'addProduct'])->name('addProduct');
+Route::get('Index',[ProductController::class,'products'])->name('product');
 
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';
