@@ -23,7 +23,6 @@ return new class extends Migration
             $table->text('Information');
             $table->string('Image');
             $table->string('Countries');
-            $table->integer('Start');
             $table->timestamps();
         });
     }

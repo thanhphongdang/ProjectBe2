@@ -211,17 +211,17 @@ class CRUDController extends Controller
     }
 
     public function user_list(Request $request)
-{
-    $users = User::all();
-    $user = Auth::user(); // Lấy user hiện tại đã đăng nhập
+    {
+        $users = User::all();
+        $user = Auth::user(); // Lấy user hiện tại đã đăng nhập
 
-    return view('page.user-list', [
-        'users' => $users,
-        'name'  => $user->name,
-        'email' => $user->email,
-        'image' => $user->image,
-    ]);
-}
+        return view('page.user-list', [
+            'users' => $users,
+            'name' => $user->name,
+            'email' => $user->email,
+            'image' => $user->image,
+        ]);
+    }
 
     public function Add()
     {
@@ -276,7 +276,7 @@ class CRUDController extends Controller
         return view('page.profile-admin', $data);
     }
 
-     
+
     // public function header($id) {
 
     //     $user = User::find($id);

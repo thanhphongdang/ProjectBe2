@@ -1,4 +1,4 @@
-<div class="ec-left-sidebar ec-bg-sidebar">
+<div class="ec-left-sidebar ec-bg-sidebar bg-dark text-white">
 	<div id="sidebar" class="sidebar ec-sidebar-footer">
 
 		<div class="ec-brand">
@@ -103,7 +103,7 @@
 					<div class="collapse">
 						<ul class="sub-menu" id="products" data-parent="#sidebar-menu">
 							<li class="">
-								<a class="sidenav-item-link" href="{{ route('addProduct') }}">
+								<a class="sidenav-item-link" href="{{ route('listproduct') }}">
 									<span class="nav-text">Add Product</span>
 								</a>
 							</li>

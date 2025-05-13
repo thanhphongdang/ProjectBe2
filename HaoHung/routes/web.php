@@ -4,6 +4,7 @@ use App\Http\Controllers\CRUDController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WarehouseController;
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
@@ -46,7 +47,18 @@ Route::post('add-user', [CRUDController::class,'postAdd'])->name('post.add');
 Route::get('admin-user/{id?}', [CRUDController::class,'Profile'])->name('helo');
 
 Route::get('add-product',[ProductController::class,'addProduct'])->name('addProduct');
+Route::post('add-product',[ProductController::class,'postAddproduct'])->name('post.product');
 Route::get('Index',[ProductController::class,'products'])->name('product');
+Route::get('/warehouse/move/{id}', [ProductController::class, 'moveToProduct'])->name('warehouse.move');
+
+
+
+
+// Warehouse
+
+Route::get('list-product',[WarehouseController::class,'listProduct'])->name('listproduct');
+Route::post('post-warehouse',[WarehouseController::class,'addInwarehouse'])->name('post.warehouse');
+
 
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';

@@ -15,4 +15,9 @@ class Product extends Model
         'Information',
         'Countries',
     ];
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class, 'ID_Car', 'ID_Car');
+    }
 }

@@ -1,6 +1,4 @@
-
-
-  <!-- Navbar -->
+<!-- Navbar -->
   <nav class="navbar">
     <ul class="nav-list">
       <li><a href="#">Home</a></li>
@@ -18,5 +16,3 @@
   </nav>
 
   <!-- Slider -->
-  
-
