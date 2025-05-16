@@ -102,7 +102,8 @@
                                                                             <span class="sr-only">Info</span>
                                                                         </button>
                                                                         <div class="dropdown-menu">
-                                                                            <a href="{{ route('warehouse.move', $user->ID_Car) }}"
+
+                                                                            <a href="{{ route('warehouse.move', $user->id) }}"
                                                                                 class="dropdown-item"
                                                                                 onclick="return confirm('Chắc chắn chuyển xe này sang danh mục bán?')">
                                                                                 Add to Product

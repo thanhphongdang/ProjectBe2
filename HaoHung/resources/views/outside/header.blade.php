@@ -47,7 +47,7 @@
 							</a>
 						</li>
 						<li class="dropdown-footer">
-							<form method="POST" action="#">
+							<form method="POST" action="{{ route('logout') }}">
 								@csrf
 								<button type="submit" class="dropdown-item">
 									<i class="mdi mdi-logout"></i> Log Out

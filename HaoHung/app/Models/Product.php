@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\Translation\Dumper\JsonFileDumper;
 
 class Product extends Model
 {
     //
     protected $fillable = [
+        'ID_Car',
         'Image',
         'Name_Car',
         'Car_Company',
@@ -18,6 +20,6 @@ class Product extends Model
 
     public function warehouse()
     {
-        return $this->belongsTo(Warehouse::class, 'ID_Car', 'ID_Car');
+        return $this->belongsTo(Warehouse::class, 'ID_Car');
     }
 }

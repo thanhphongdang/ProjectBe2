@@ -61,10 +61,6 @@
         <input type="text" name="address" class="form-control" placeholder="Enter your address" required>
       </div>
       <div class="mb-3 text-start">
-        <label class="form-label fst-italic">Image</label>
-        <input type="file" name="image" class="form-control" placeholder="Image" required>
-      </div>
-      <div class="mb-3 text-start">
         <label class="form-label fst-italic">Password</label>
         <input type="password" name="password" class="form-control" placeholder="Create a password (min 6 characters)" required minlength="6">
       </div>

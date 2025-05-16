@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 /**
  * CRUD User controller
  */
@@ -95,7 +97,7 @@ class CRUDController extends Controller
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'image' => $imageName, // Lưu tên file vào DB
+            'image' => $imageName ?? 'default-avatar.png',
         ]);
 
         return redirect("login")->with('success', 'Đăng ký thành công!');
@@ -275,6 +277,41 @@ class CRUDController extends Controller
         ];
         return view('page.profile-admin', $data);
     }
+    
+     public function ProfileUser($id)
+    {
+
+        $user = User::find($id);
+
+        $data = [
+            'user' => $user
+        ];
+        return view('page.profile-user', $data);
+    }
+
+    public function destroy(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+
+
+    public function showCheckout()
+    {
+        // Dữ liệu giả
+        $amount = 50000;
+        $orderId = uniqid();
+        $momoQr = "https://nhantien.momo.vn/0352693087"; // thay bằng số MoMo của bạn
+        $bankQr = "blob:https://chat.zalo.me/8aaae9a8-d7c5-41b8-9171-680bb7ccdc2d?amount=$amount&addInfo=DH$orderId";
+
+        return view('pay.checkout', compact('amount', 'momoQr', 'bankQr'));
+    }
+
+
+
 
 
     // public function header($id) {

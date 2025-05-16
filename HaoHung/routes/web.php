@@ -40,16 +40,20 @@ Route::post('update', [CRUDController::class,'postUpdateUser'])->name('post.upda
 Route::get('add-user', [CRUDController::class,'Add'])->name('user.add');
 Route::post('add-user', [CRUDController::class,'postAdd'])->name('post.add');
 
+Route::post('/logout', [CRUDController::class, 'destroy'])->name('logout');
+
+
 // Route::get('admin', [CRUDController::class,'header'])->name('helo');
 
 //Chi thong tin lay mot minh admin
 // Route::get('admin-user', [CRUDController::class,'Profile'])->name('admin');
 Route::get('admin-user/{id?}', [CRUDController::class,'Profile'])->name('helo');
+Route::get('admin-user/{id?}', [CRUDController::class,'ProfileUser'])->name('helo');
 
 Route::get('add-product',[ProductController::class,'addProduct'])->name('addProduct');
-Route::post('add-product',[ProductController::class,'postAddproduct'])->name('post.product');
+Route::post('add-product',[ProductController::class,'store'])->name('post.product');
 Route::get('Index',[ProductController::class,'products'])->name('product');
-Route::get('/warehouse/move/{id}', [ProductController::class, 'moveToProduct'])->name('warehouse.move');
+Route::get('product/{id}', [ProductController::class, 'moveToProduct'])->name('warehouse.move');
 
 
 
@@ -58,6 +62,12 @@ Route::get('/warehouse/move/{id}', [ProductController::class, 'moveToProduct'])-
 
 Route::get('list-product',[WarehouseController::class,'listProduct'])->name('listproduct');
 Route::post('post-warehouse',[WarehouseController::class,'addInwarehouse'])->name('post.warehouse');
+
+
+
+
+
+Route::get('/checkout', [CRUDController::class, 'showCheckout'])->name('checkout');
 
 
 // require __DIR__.'/settings.php';

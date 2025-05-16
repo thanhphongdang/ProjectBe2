@@ -37,41 +37,38 @@ class ProductController extends Controller
 
 
     }
-    public function postAddproduct(Request $request)
+    public function store(Request $request)
     {
-
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'ID_Car' => 'required|exists:cars,ID_Car', // khóa ngoại phải tồn tại
+            'Name_Car' => 'required|string|max:255',
+            'Car_Company' => 'required|string|max:255',
+            'Price' => 'required|numeric|min:0',
+            'Information' => 'nullable|string',
+            'Countries' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // dd($request->all());
-
         $data = $request->all();
-
         $imageName = null;
 
-        // Nếu người dùng có upload avatar (tên input trong form là "image")
         if ($request->hasFile('image')) {
-            // $image = $request->file('image');
-            // dd($image);
-            $imageName = time() . "_" . $data["image"]->getClientOriginalName();
-            $data["image"]->move(public_path('image'), $imageName);
+            $file = $request->file('image');
+            $imageName = time() . "_" . $file->getClientOriginalName();
+            $file->move(public_path('images/products'), $imageName);
         }
 
-        // Tạo user
-        $check = User::create([
-            'name' => $data['name'],
-            'address' => $data['address'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'image' => $imageName, // Lưu tên file vào DB
+        Product::create([
+            'ID_Car' => $data['ID_Car'],
+            'Name_Car' => $data['Name_Car'],
+            'Car_Company' => $data['Car_Company'],
+            'Price' => $data['Price'],
+            'Information' => $data['Information'],
+            'Image' => $imageName,
+            'Countries' => $data['Countries'],
         ]);
 
-        return redirect("user-list")->with('success', 'Add suddessfully !');
+        return redirect()->route('product.index')->with('success', 'Thêm sản phẩm thành công!');
     }
 
 
@@ -83,7 +80,7 @@ class ProductController extends Controller
 
         // Tạo bản ghi mới trong bảng products
         Product::create([
-            'ID_Car' => $car->ID_Car,
+            'ID_Car' => $car->id, // lưu khóa ngoại (id kho)
             'Name_Car' => $car->Name_Car,
             'Car_Company' => $car->Car_Company,
             'Price' => $car->Price,
@@ -96,12 +93,13 @@ class ProductController extends Controller
         $car->Quantity -= 1;
 
         if ($car->Quantity <= 0) {
-            $car->delete(); // hoặc $car->status = 'inactive'; $car->save();
+            $car->delete(); // hoặc: $car->status = 'inactive'; $car->save();
         } else {
             $car->save();
         }
 
         return back()->with('success', 'Xe đã được chuyển sang danh mục bán.');
+
     }
 
 }

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\warehouse;
 use Illuminate\Support\Facades\Auth;
 use Hash;
+use App\Models\Product;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OutOfStockNotification;
 class WarehouseController extends Controller
 {
     //
@@ -60,4 +63,19 @@ class WarehouseController extends Controller
             'users' => $users,
         ]);
     }
+
+    public function store(Request $request)
+{
+    $product = Product::find($request->product_id);
+
+    if ($product->stock <= 0) {
+        // Gửi email cho admin
+        Notification::route('mail', 'kybui09@gmail.com')
+            ->notify(new OutOfStockNotification($product));
+
+        return back()->with('error', 'Sản phẩm đã hết hàng.');
+    }
+
+    // Tiếp tục xử lý đặt hàng
+}
 }

@@ -68,8 +68,8 @@
                                             <div class="row ec-vendor-uploads">
                                                 <div class="col-lg-8">
                                                     <div class="ec-vendor-upload-detail">
-                                                        <form class="row g-3" action="{{ route('post.warehouse') }}" method="post"
-                                                            enctype="multipart/form-data">
+                                                        <form class="row g-3" action="{{ route('post.warehouse') }}"
+                                                            method="post" enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail4" class="form-label">Name</label>
@@ -87,13 +87,12 @@
                                                                     <option value="Ford">Ford</option>
                                                                     <option value="Mercedes">Mercedes</option>
                                                                     <option value="Lamborghini">Lamborghini</option>
-                                                                     <option value="Ferrari">Ferrari</option>
+                                                                    <option value="Ferrari">Ferrari</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label">Countries</label>
-                                                                <select name="Countries" id="Countries"
-                                                                    class="form-select">
+                                                                <select name="Countries" id="Countries" class="form-select">
                                                                     <option value="Germany">Germany</option>
                                                                     <option value="Japan">Japan</option>
                                                                     <option value="America">America</option>
@@ -122,7 +121,8 @@
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label class="form-label">Information</label>
-                                                                <textarea class="form-control" name="information" id="information" rows="4"></textarea>
+                                                                <textarea class="form-control" name="information"
+                                                                    id="information" rows="4"></textarea>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="product_add_cancel_button">
