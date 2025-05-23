@@ -27,7 +27,7 @@
     <!-- FAVICON -->
     <link href="{{ asset('assets/img/favicon.png') }}" rel="shortcut icon" />
 
-   <link id="style.css" href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <link id="style.css" href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -185,18 +185,16 @@
 
         /* Footer */
         .footer {
-            background-color: white;
-            padding: 20px;
-            text-align: right;
-            font-weight: bold;
-            color: green;
-            font-size: 18px;
+            background: linear-gradient(to right, #131313, #131313);
+            padding: 40px 20px;
+            width: 100vw;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-     @include('outside.navbar-index')
+    @include('outside.navbar-index')
 
     <div class="slider-container">
         <div class="slider-wrapper">
@@ -209,7 +207,7 @@
     </div>
 
     <!-- Product Section -->
-    <section class="products container mt-5">
+    <!-- <section class="products container mt-5">
         <h2 class="mb-4">Product Hot</h2>
 
         <div class="row">
@@ -230,12 +228,59 @@
                 </div>
             @endforeach
         </div>
+    </section> -->
+
+    <section class="products container mt-5">
+        <div class="mb-4 text-center">
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <a href="{{ route('products.index') }}"
+                    class="btn btn-outline-dark @if(!isset($currentCategory)) active @endif">All products</a>
+                <a href="{{ route('products.category', urlencode('Audi')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Audi') active @endif">Audi</a>
+                <a href="{{ route('products.category', urlencode('BMW')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'BMW') active @endif">BMW</a>
+                <a href="{{ route('products.category', urlencode('Mercedes')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Mercedes') active @endif">Mercedes</a>
+                <a href="{{ route('products.category', urlencode('Ferrari')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Ferrari') active @endif">Ferrari</a>
+                <a href="{{ route('products.category', urlencode('Lamborghini')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Lamborghini') active @endif">Lamborghini</a>
+                <a href="{{ route('products.category', urlencode('Porsche')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Porsche') active @endif">Porsche</a>
+                <a href="{{ route('products.category', urlencode('Bugatti')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Bugatti') active @endif">Bugatti</a>
+                <a href="{{ route('products.category', urlencode('Bentley')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Bentley') active @endif">Bentley</a>
+                <a href="{{ route('products.category', urlencode('Nissan')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Nissan') active @endif">Nissan</a>
+                {{-- <a href="{{ route('products.category', urlencode('Roll-Royce')) }}"
+                    class="btn btn-outline-dark @if(isset($currentCategory) && $currentCategory == 'Roll-Royce') active @endif">Rolls
+                    Royce</a> --}}
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach ($products as $product)
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+                    <div class="product-card">
+                        <img src="{{ asset('image/' . $product->Image) }}" alt="{{ $product->name_Car }}">
+                        <h3>{{ $product->Name_Car }}</h3>
+                        <p>{{ $product->Car_Company }}</p>
+                        <p>Price: {{ $product->Price }}</p>
+                        <p>Information: {{ $product->information }}</p>
+                        <p>Origin: {{ $product->Countries }}</p>
+                        <div>
+                            <button>View</button>
+                            <button>Compare</button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p>📞 0123456789</p>
-    </footer>
+    @include('outside.footer-user')
 
     <script src="{{ asset('assets/plugins/jquery/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

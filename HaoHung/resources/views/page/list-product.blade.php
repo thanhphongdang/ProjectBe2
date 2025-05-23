@@ -108,11 +108,10 @@
                                                                                 onclick="return confirm('Chắc chắn chuyển xe này sang danh mục bán?')">
                                                                                 Add to Product
                                                                             </a>
-
                                                                             <a class="dropdown-item"
-                                                                                href="{{ route('update.user', ['id' => $user->id]) }}">Edit</a>
+                                                                                href="{{ route('delete.product', ['id' => $user->id]) }}">Delete</a>
                                                                             <a class="dropdown-item"
-                                                                                href="{{ route('user.delete', ['id' => $user->id]) }}">Delete</a>
+                                                                                href="{{ route('update.product', ['id' => $user->id]) }}">Edit</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>

@@ -51,7 +51,7 @@
                         <div class="content">
                             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                                 <div>
-                                    <h1>Updata Customer</h1>
+                                    <h1>Updata User</h1>
                                     <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
                                         <span><i class="mdi mdi-chevron-right"></i></span>Update
                                     </p>
@@ -81,43 +81,49 @@
                                                                 <label for="inputEmail4" class="form-label">Update
                                                                     Name</label>
                                                                 <input type="text" name="name"
-                                                                    class="form-control slug-title" placeholder="Name"
-                                                                    id="name" value="{{$user->name}}">
+                                                                    class="form-control slug-title" maxlength="30"
+                                                                    placeholder="Name" id="name" value="{{$user->name}}">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Email</label>
                                                                 <input type="email" name="email"
-                                                                    class="form-control slug-title" placeholder="Email"
-                                                                    id="email" value="{{$user->email}}">
+                                                                    class="form-control slug-title"
+                                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                                    placeholder="Email" id="email" value="{{$user->email}}">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Address</label>
                                                                 <input type="text" name="address"
-                                                                    class="form-control slug-title" placeholder="Address"
+                                                                    class="form-control slug-title"
+                                                                    pattern="[a-zA-Z0-9\s.,'-]+" placeholder="Address"
                                                                     id="address" value="{{$user->address}}">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Phone</label>
                                                                 <input type="phone" name="phone"
-                                                                    class="form-control slug-title" placeholder="Phone"
-                                                                    id="phone" value="{{$user->phone}}">
+                                                                    class="form-control slug-title" maxlength="10"
+                                                                    placeholder="Phone" id="phone" value="{{$user->phone}}">
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label for="inputEmail5" class="form-label">Phone</label>
+                                                                <label for="inputEmail5" class="form-label">Image</label>
                                                                 <input type="file" name="image"
                                                                     class="form-control slug-title" placeholder="Phone"
                                                                     id="image">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail8" class="form-label">Password</label>
-                                                                <input type="password" name="password" class="form-control"
-                                                                    placeholder="Password" id="password">
+                                                                <input type="password" name="password"
+                                                                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
+                                                                    class="form-control" placeholder="Password"
+                                                                    id="password">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail8" class="form-label">Confirm
                                                                     Password</label>
-                                                                <input type="password" name="password" class="form-control"
-                                                                    placeholder="Coflim Password" id="password">
+                                                                <input type="password" name="password"
+                                                                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
+                                                                    class="form-control" placeholder="Coflim Password"
+                                                                    id="password">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="product_add_cancel_button">
@@ -178,6 +184,12 @@
 
     <!-- custom js -->
     <script src="assets/js/custom.js"></script>
+
+    <script>
+  document.querySelector('input[name="password"]').addEventListener('input', function () {
+    this.value = this.value.replace(/\s/g, '');
+  });
+</script>
 </body>
 
 

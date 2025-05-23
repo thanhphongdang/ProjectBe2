@@ -106,8 +106,14 @@
                                                                         <div class="dropdown-menu">
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('update.user', ['id' => $user->id]) }}">Edit</a>
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('user.delete', ['id' => $user->id]) }}">Delete</a>
+                                                                            <!-- <a class="dropdown-item" href="{{ route('user.delete', ['id' => $user->id]) }}">Delete</a> -->
+                                                                             <form action="{{ route('user.delete', ['id' => $user->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                              <button type="submit" class="dropdown-item" style="border: none; background: none; padding: 0; margin: 15; color: red;">
+                                                                                  Delete</button>
+                                                                              </form> 
+
                                                                         </div>
                                                                     </div>
                                                                 </td>

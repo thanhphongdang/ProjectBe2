@@ -51,36 +51,45 @@
                         <div class="content">
                             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                                 <div>
-                                    <h1>ADD PRODUCT</h1>
+                                    <h1>Updata Product</h1>
                                     <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                                        <span><i class="mdi mdi-chevron-right"></i></span>PRODUCT
+                                        <span><i class="mdi mdi-chevron-right"></i></span>Update
                                     </p>
+                                </div>
+                                <div>
+                                    <a href="product-list.html" class="btn btn-primary"> View All
+                                    </a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card card-default">
                                         <div class="card-header card-header-border-bottom">
-                                            <h2>ADD Product</h2>
+                                            <h2>Update Product</h2>
                                         </div>
+                                        <form class="row g-3" action="{{ route('product.update') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="card-body">
+                                                <div class="row ec-vendor-uploads">
+                                                    <div class="col-lg-8">
+                                                        <div class="ec-vendor-upload-detail">
 
-                                        <div class="card-body">
-                                            <div class="row ec-vendor-uploads">
-                                                <div class="col-lg-8">
-                                                    <div class="ec-vendor-upload-detail">
-                                                        <form class="row g-3" action="{{ route('post.warehouse') }}"
-                                                            method="post" enctype="multipart/form-data">
                                                             @csrf
+                                                            <input name="id" type="hidden" value="{{$user->id}}">
                                                             <div class="col-md-6">
-                                                                <label for="inputEmail4" class="form-label">Name</label>
+                                                                <label for="inputEmail4" class="form-label">Update
+                                                                    Name</label>
                                                                 <input type="text" name="Name_Car"
-                                                                    class="form-control slug-title" placeholder="Name Car"
-                                                                    id="Name_Car">
+                                                                    class="form-control slug-title" placeholder="Name"
+                                                                    id="Name_Car" value="{{$user->Name_Car}}">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label">Company</label>
                                                                 <select name="Car_Company" id="Car_Company"
                                                                     class="form-select">
+                                                                    <option value="{{$user->Car_Company}}">
+                                                                        {{$user->Car_Company}}</option>
                                                                     <option value="Audi">Audi</option>
                                                                     <option value="Nissan">Nissan</option>
                                                                     <option value="Toyota">Toyota</option>
@@ -96,6 +105,8 @@
                                                             <div class="col-md-6">
                                                                 <label class="form-label">Countries</label>
                                                                 <select name="Countries" id="Countries" class="form-select">
+                                                                    <option value="{{ $user->Countries }}">
+                                                                        {{ $user->Countries }}</option>
                                                                     <option value="Germany">Germany</option>
                                                                     <option value="Japan">Japan</option>
                                                                     <option value="America">America</option>
@@ -106,9 +117,9 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Price</label>
-                                                                <input type="price" name="Price"
+                                                                <input type="number" name="Price"
                                                                     class="form-control slug-title" placeholder="Price"
-                                                                    id="Price">
+                                                                    id="Price" value="{{$user->Price}}">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Image</label>
@@ -116,37 +127,41 @@
                                                                     class="form-control slug-title" placeholder="Image"
                                                                     id="Image">
                                                             </div>
+                                                            <div class="col-md-12">
+                                                                <label class="form-label">Information</label>
+                                                                <textarea class="form-control" name="information"
+                                                                    id="information"
+                                                                    rows="4">{{$user->information}}</textarea>
+                                                            </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Quantity</label>
                                                                 <input type="number" name="Quantity"
                                                                     class="form-control slug-title" placeholder="Quantity"
-                                                                    id="Quantity">
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <label class="form-label">Information</label>
-                                                                <textarea class="form-control" name="information"
-                                                                    id="information" rows="4"></textarea>
+                                                                    id="Quantity" value="{{$user->Price}}">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="product_add_cancel_button">
                                                                     <button type="button"
                                                                         class="btn btn-border">Cancel</button>
                                                                     <button type="submit"
-                                                                        class="btn btn-primary">Add</button>
+                                                                        class="btn btn-primary">Update</button>
                                                                 </div>
                                                             </div>
-                                                        </form>
+
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="ec-vendor-img-upload">
-                                                        <div class="ec-vendor-main-img">
-                                                            <div class="avatar-upload">
-                                                                <div class="avatar-preview ec-preview">
-                                                                    <div class="imagePreview ec-div-preview">
-                                                                        <img class="ec-image-preview"
-                                                                            src="img/Bentley flying spur.jpg"
-                                                                            alt="edit" />
+                                                    <div class="col-lg-4">
+                                                        <div class="ec-vendor-img-upload">
+                                                            <div class="ec-vendor-main-img">
+                                                                <div class="avatar-upload">
+                                                                    <div class="avatar-edit">
+                                                                    </div>
+                                                                    <div class="avatar-preview ec-preview">
+                                                                        <div class="imagePreview ec-div-preview">
+                                                                            <img class="ec-image-preview"
+                                                                                src="{{ asset('image/' . $user->Image) }}"
+                                                                                alt="edit" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -154,7 +169,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

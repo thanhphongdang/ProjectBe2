@@ -51,9 +51,9 @@
                         <div class="content">
                             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                                 <div>
-                                    <h1>ADD PRODUCT</h1>
+                                    <h1>ADD DETAILS</h1>
                                     <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                                        <span><i class="mdi mdi-chevron-right"></i></span>PRODUCT
+                                        <span><i class="mdi mdi-chevron-right"></i></span>DETAILS
                                     </p>
                                 </div>
                             </div>
@@ -61,71 +61,42 @@
                                 <div class="col-12">
                                     <div class="card card-default">
                                         <div class="card-header card-header-border-bottom">
-                                            <h2>ADD Product</h2>
+                                            <h2>ADD Details</h2>
                                         </div>
 
                                         <div class="card-body">
                                             <div class="row ec-vendor-uploads">
                                                 <div class="col-lg-8">
                                                     <div class="ec-vendor-upload-detail">
-                                                        <form class="row g-3" action="{{ route('post.warehouse') }}"
-                                                            method="post" enctype="multipart/form-data">
+                                                        <form class="row g-3" action="{{ route('add.detail') }}" method="post"
+                                                            enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="col-md-6">
-                                                                <label for="inputEmail4" class="form-label">Name</label>
-                                                                <input type="text" name="Name_Car"
-                                                                    class="form-control slug-title" placeholder="Name Car"
-                                                                    id="Name_Car">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label class="form-label">Company</label>
-                                                                <select name="Car_Company" id="Car_Company"
-                                                                    class="form-select">
-                                                                    <option value="Audi">Audi</option>
-                                                                    <option value="Nissan">Nissan</option>
-                                                                    <option value="Toyota">Toyota</option>
-                                                                    <option value="Ford">Ford</option>
-                                                                    <option value="Mercedes">Mercedes</option>
-                                                                    <option value="Lamborghini">Lamborghini</option>
-                                                                    <option value="Ferrari">Ferrari</option>
-                                                                    <option value="Ferrari">Bentley</option>
-                                                                    <option value="Ferrari">Porsche</option>
-                                                                    <option value="Ferrari">BMW</option>
+                                                                <select name="ID_Car" id="ID_Car" class="form-select"
+                                                                    required>
+                                                                    <option value="">-- Select Id Car --</option>
+                                                                    @foreach ($carIds as $id)
+                                                                        <option value="{{ $id }}">{{ $id }}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label">Countries</label>
-                                                                <select name="Countries" id="Countries" class="form-select">
-                                                                    <option value="Germany">Germany</option>
-                                                                    <option value="Japan">Japan</option>
-                                                                    <option value="America">America</option>
-                                                                    <option value="Việt">Việt Nam</option>
-                                                                    <option value="Bazil">Bazil</option>
-                                                                    <option value="England">England</option>
-                                                                </select>
+                                                                <label for="inputEmail5" class="form-label">Engine Type</label>
+                                                                <input type="text" name="Engine_Type"
+                                                                    class="form-control slug-title" placeholder="Engine Type"
+                                                                    id="Engine_Type">
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label for="inputEmail5" class="form-label">Price</label>
-                                                                <input type="price" name="Price"
-                                                                    class="form-control slug-title" placeholder="Price"
-                                                                    id="Price">
+                                                                <label for="inputEmail5" class="form-label">Speed</label>
+                                                                <input type="text" name="Speed"
+                                                                    class="form-control slug-title" placeholder="Speed"
+                                                                    id="Speed">
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label for="inputEmail5" class="form-label">Image</label>
-                                                                <input type="file" name="Image"
-                                                                    class="form-control slug-title" placeholder="Image"
-                                                                    id="Image">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="inputEmail5" class="form-label">Quantity</label>
-                                                                <input type="number" name="Quantity"
-                                                                    class="form-control slug-title" placeholder="Quantity"
-                                                                    id="Quantity">
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <label class="form-label">Information</label>
-                                                                <textarea class="form-control" name="information"
-                                                                    id="information" rows="4"></textarea>
+                                                                <label for="inputEmail5" class="form-label">Car consumption</label>
+                                                                <input type="text" name="Car_consumption"
+                                                                    class="form-control slug-title" placeholder="Car consumption"
+                                                                    id="Car_consumption">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="product_add_cancel_button">
@@ -145,8 +116,7 @@
                                                                 <div class="avatar-preview ec-preview">
                                                                     <div class="imagePreview ec-div-preview">
                                                                         <img class="ec-image-preview"
-                                                                            src="img/Bentley flying spur.jpg"
-                                                                            alt="edit" />
+                                                                            src="img/Bentley flying spur.jpg" alt="edit" />
                                                                     </div>
                                                                 </div>
                                                             </div>

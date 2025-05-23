@@ -3,31 +3,34 @@
 
 
 <!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 12:09:19 GMT -->
+
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Andshop - Admin Dashboard HTML Template.">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Andshop - Admin Dashboard HTML Template.">
 
-	<title>Andshop - Admin Dashboard HTML Template.</title>
+    <title>Andshop - Admin Dashboard HTML Template.</title>
 
-	<!-- GOOGLE FONTS -->
-	<link rel="preconnect" href="https://fonts.googleapis.com/">
-	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet">
 
-	<link href="{{asset('assets/css/materialdesignicons.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/materialdesignicons.min.css')}}" rel="stylesheet" />
 
-	<!-- PLUGINS CSS STYLE -->
-	<link href="{{ asset('assets/plugins/simplebar/simplebar.css') }}" rel="stylesheet" />
+    <!-- PLUGINS CSS STYLE -->
+    <link href="{{ asset('assets/plugins/simplebar/simplebar.css') }}" rel="stylesheet" />
 
-	<!-- custom css -->
-	<link id="style.css" rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <!-- custom css -->
+    <link id="style.css" rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 
-	<!-- FAVICON -->
-	<link href="{{ asset('assets/img/favicon.png') }}" rel="shortcut icon" />
+    <!-- FAVICON -->
+    <link href="{{ asset('assets/img/favicon.png') }}" rel="shortcut icon" />
 
-     <style>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -198,7 +201,7 @@
 <body>
 
 
-   
+
 
     <!-- Sidebar / Navbar -->
     @include('outside.navbar-index')
@@ -230,6 +233,19 @@
                                 <div class="user_profile_top_des">
                                     <div class="user_profile_img">
                                         <img src="{{ asset('image/' . $user->image) }}" alt="" width="150">
+                                        <label for="upload-image" class="upload-icon"
+                                            style="position: absolute; bottom: 0; right: 0; background: rgba(0,0,0,0.6); border-radius: 50%; padding: 6px; cursor: pointer;">
+                                            <i class="fas fa-camera text-white"></i>
+                                        </label>
+
+                                        <!-- Form upload ảnh ẩn -->
+                                        <form id="image-upload-form" action="#" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="file" name="image" id="upload-image" accept="image/*"
+                                                style="display: none;"
+                                                onchange="document.getElementById('image-upload-form').submit();">
+                                        </form>
                                     </div>
                                     <div class="user_profile_text_top">
                                         <h3>{{ $user->name }}</h3>
@@ -787,7 +803,6 @@
                                                         </div>
                                                         <div class="tab-pane-content mt-5">
                                                             <form>
-
                                                                 <div class="row mb-2">
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
@@ -889,17 +904,17 @@
 
 
     <!-- Common Javascript -->
-   <script src="{{ asset('assets/plugins/jquery/jquery-3.5.1.min.js') }}"></script>
-	<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-	<script src="{{ asset('assets/plugins/simplebar/simplebar.min.js') }}"></script>
-	<script src="{{ asset('assets/plugins/jquery-zoom/jquery.zoom.min.js') }}"></script>
-	<script src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jquery/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jquery-zoom/jquery.zoom.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
 
-	<!-- Option Switcher -->
-	<script src="{{ asset('assets/plugins/options-sidebar/optionswitcher.js') }}"></script>
+    <!-- Option Switcher -->
+    <script src="{{ asset('assets/plugins/options-sidebar/optionswitcher.js') }}"></script>
 
-	<!-- custom js -->
-	<script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- custom js -->
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
 </body>
 

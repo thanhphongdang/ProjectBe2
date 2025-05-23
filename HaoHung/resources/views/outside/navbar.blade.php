@@ -96,36 +96,50 @@
 				<!-- Products -->
 				<li class="has-sub">
 					<a class="sidenav-item-link" href="javascript:void(0)">
-						<i class="mdi mdi-palette-advanced"></i>
 						<i class="mdi mdi-package-variant-closed"></i>
-						<span class="nav-text">Products</span> <b class="caret"></b>
+						<span class="nav-text">Product</span> <b class="caret"></b>
 					</a>
 					<div class="collapse">
 						<ul class="sub-menu" id="products" data-parent="#sidebar-menu">
 							<li class="">
-								<a class="sidenav-item-link" href="{{ route('listproduct') }}">
+								<a class="sidenav-item-link" href="{{ route('addProduct') }}">
 									<span class="nav-text">Add Product</span>
 								</a>
 							</li>
 							<li class="">
-								<a class="sidenav-item-link" href="#">
+								<a class="sidenav-item-link" href="{{ route('listproduct') }}">
 									<span class="nav-text">List Product</span>
 								</a>
 							</li>
 							<li class="">
-								<a class="sidenav-item-link" href="#">
-									<span class="nav-text">Grid Product</span>
-								</a>
-							</li>
-							<li class="">
-								<a class="sidenav-item-link" href="#">
-									<span class="nav-text">Product Detail</span>
+								<a class="sidenav-item-link" href="{{ route('detail.add') }}">
+									<span class="nav-text">Add Details Product</span>
 								</a>
 							</li>
 						</ul>
 					</div>
 				</li>
+                 
 
+				<li class="has-sub">
+					<a class="sidenav-item-link" href="javascript:void(0)">
+						<i class="mdi mdi-account-multiple-outline"></i>
+						<span class="nav-text">Voucher</span> <b class="caret"></b>
+					</a>
+					<div class="collapse">
+						<ul class="sub-menu" id="users" data-parent="#sidebar-menu">
+							<li>
+								<a class="sidenav-item-link" href="{{ route('sale.list') }}">
+									<span class="nav-text">Sale</span>
+								</a>
+								<a class="sidenav-item-link" href="{{ route('list.get') }}">
+									<span class="nav-text">Add Voucher</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<hr>
+				</li>
 				<!-- Orders -->
 				<!-- <li class="has-sub">
 							<a class="sidenav-item-link" href="javascript:void(0)">

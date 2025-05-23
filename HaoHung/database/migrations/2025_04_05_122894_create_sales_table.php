@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id('ID_Sale');
             $table->string('Name_Sale');
-            $table->timestamp('Start_Date')->useCurrent();
-            $table->timestamp('End_Date')->useCurrent();
+            $table->integer('Moneny');
+            $table->string('Code_Voucher');
+             $table->string('description');
             $table->timestamps();
         });
     }

@@ -119,10 +119,11 @@ class CRUDController extends Controller
     /**
      * Delete user by id
      */
-    public function deleteUser(Request $request)
+    public function deleteUser(Request $request, $id)
     {
-        $user_id = $request->get('id');
-        $user = User::destroy($user_id);
+        // dd("Minh Hieu");
+        // $user_id = $request->get('id');
+        $user = User::destroy($id);
 
         return redirect("user-list")->withSuccess('You have signed-in');
     }
@@ -132,9 +133,8 @@ class CRUDController extends Controller
      */
     public function updateUser(Request $request)
     {
-        $user_id = $request->get('id');
-        $user = User::find($user_id);
-
+        $id = $request->get('id');
+        $user = User::find($id);
         return view('page.edit-user', ['user' => $user]);
     }
 
@@ -215,13 +215,14 @@ class CRUDController extends Controller
     public function user_list(Request $request)
     {
         $users = User::all();
-        $user = Auth::user(); // Lấy user hiện tại đã đăng nhập
+        // $user = Auth::user(); // Lấy user hiện tại đã đăng nhập
+        // return "Hao HUng";
 
         return view('page.user-list', [
             'users' => $users,
-            'name' => $user->name,
-            'email' => $user->email,
-            'image' => $user->image,
+            // 'name' => $user->name,
+            // 'email' => $user->email,
+            // 'image' => $user->image,
         ]);
     }
 
@@ -277,8 +278,8 @@ class CRUDController extends Controller
         ];
         return view('page.profile-admin', $data);
     }
-    
-     public function ProfileUser($id)
+
+    public function ProfileUser($id)
     {
 
         $user = User::find($id);
@@ -309,10 +310,32 @@ class CRUDController extends Controller
 
         return view('pay.checkout', compact('amount', 'momoQr', 'bankQr'));
     }
+   
+     public function ForgetPassword()
+    {
+        return view('page.forgetPassword');
+    }
 
 
+    public function postUpdatePassword(Request $request)
+    {
+        // Validate email phải tồn tại và password >= 6 ký tự
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:6',
+        ]);
 
+        // Tìm người dùng qua email
+        $user = User::where('email', $request->input('email'))->first();
 
+        // Cập nhật mật khẩu mới đã mã hóa
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+
+        // Redirect hoặc hiển thị thông báo thành công
+        // return redirect('login')->route('login')->with('success', 'Password updated successfully. Please sign in.');
+        return redirect("login")->withSuccess('Password updated successfully. Please sign in.');
+    }
 
     // public function header($id) {
 

@@ -50,17 +50,21 @@
       @csrf
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Enter your email">
+        <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          placeholder="Enter your email">
         @error('email') <small>{{ $message }}</small>@enderror
       </div>
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Password</label>
-        <input type="password" name="password" class="form-control"
-          placeholder="password (min 6 characters)" required minlength="6">
+        <input type="password" name="password" class="form-control" placeholder="password (min 6 characters)"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required minlength="6">
         @error('password') <small>{{ $message }}</small>@enderror
       </div>
       <div class="mb-3 text-end">
-        <label class="form-label fst-italic">Forget Password ?</label>
+        <label class="form-label fst-italic"> <a href="{{ route('forgetPassword.sign') }} "
+            style="text-decoration:none;">
+            Forget Password ?
+          </a></label>
       </div>
       <div class="d-flex mt-4 justify-conten-between">
         <a href="{{ route('Sign') }}" class="btn btn-primary" style="color: white;text-decoration: none;">Sign in</a>
@@ -70,5 +74,11 @@
   </div>
 
 </body>
+<!-- #region -->
+<script>
+  document.querySelector('input[name="password"]').addEventListener('input', function () {
+    this.value = this.value.replace(/\s/g, '');
+  });
+</script>
 
 </html>

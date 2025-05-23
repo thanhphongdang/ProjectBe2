@@ -102,4 +102,75 @@ class ProductController extends Controller
 
     }
 
+    public function filterByCategory($category)
+    {
+        $category = urldecode($category);
+        $category = trim($category);
+        $products = Product::whereRaw('LOWER(car_Company) LIKE ?', ['%' . strtolower($category) . '%'])->get();
+        return view('page.index', [
+            'products' => $products,
+            'currentCategory' => $category
+        ]);
+    }
+
+    public function updateProduct(Request $request)
+    {
+        $id = $request->get('id');
+        $user = warehouse::find($id);
+        return view('page.edit-product', ['user' => $user]);
+    }
+
+
+    public function postUpdateProduct(Request $request)
+    {
+        $input = $request->all();
+        // dd($input);
+        $request->validate([
+            'Name_Car' => 'required',
+            'Car_Company' => 'required',
+            'Countries' => 'required',
+            'Price' => 'required|numeric',
+            'information' => 'nullable|string',
+            'Image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'Quantity'=> 'required|integer',
+        ]);
+
+        $product = warehouse::find($input['id']);
+        // dd($product);
+        // Xử lý ảnh nếu có tải lên mới
+        if ($request->hasFile('Image')) {
+            if ($product->Image && file_exists(public_path('image/' . $product->Image))) {
+                unlink(public_path('image/' . $product->Image));
+            }
+             
+            $imageName = time() . "_" . $input["Image"]->getClientOriginalName();
+           
+            $input["Image"]->move(public_path('image'), $imageName);
+            $product->Image = $imageName;
+            //  dd($product->Image = $imageName);
+        }
+
+        // Cập nhật các trường dữ liệu
+        $product->Name_Car = $input['Name_Car'];
+        $product->Quantity = $input['Quantity'];
+        $product->Car_Company = $input['Car_Company'];
+        $product->Countries = $input['Countries'];
+        $product->Price = $input['Price'];
+        $product->information = $input['information'] ?? null;
+        //  dd($product);exit();
+        $product->save();
+        // dd('thanh cong');
+        return redirect("list-product")->withSuccess('Sản phẩm đã được cập nhật thành công.');
+    }
+
+    public function deleteProduct(Request $request,$id)
+    {
+        // dd("Minh Hieu");
+        // $id = $request->get('id');
+        $user = warehouse::destroy($id);
+
+        return redirect("list-product")->withSuccess('You have signed-in');
+    }
+    
+    
 }

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-    <title>Sign Up</title>
+  <title>Sign Up</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background-image: url('image/hinh1.jpg'); /* thay link ảnh nền */
+      background-image: url('image/hinh1.jpg');
+      /* thay link ảnh nền */
       background-size: cover;
       background-position: center;
       height: 100vh;
@@ -39,6 +41,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="login-card text-center">
     <h3 class="mb-4 fst-italic">SIGN IN</h3>
@@ -46,23 +49,33 @@
       @csrf
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Full Name</label>
-        <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+        <input type="text" name="name" class="form-control" maxlength="30"
+          placeholder="Enter your full name" required>
       </div>
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+        <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          placeholder="Enter your email" required>
       </div>
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Phone</label>
-        <input type="tel" name="phone" class="form-control" placeholder="Enter your phone number" required>
+        <input type="number" name="phone" class="form-control" pattern="[0,9]+" maxlength="10"
+          placeholder="Enter your phone number" required>
       </div>
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Address</label>
-        <input type="text" name="address" class="form-control" placeholder="Enter your address" required>
+        <input type="text" name="address" class="form-control" pattern="[a-zA-Z0-9\s.,'-]+"
+          placeholder="Enter your address" required>
       </div>
+      <!-- <div class="col-md-6">
+        <label for="inputEmail5" class="form-label">Image</label>
+        <input type="file" name="image" class="form-control slug-title" placeholder="Image" id="image">
+      </div> -->
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Create a password (min 6 characters)" required minlength="6">
+        <input type="password" name="password" class="form-control"
+          pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
+          placeholder="Create a password (min 6 characters)" required minlength="6">
       </div>
       <div class="d-flex justify-content-between mt-4">
         <a href="{{ route('Login') }}" class="btn btn-black" style="color: white;text-decoration: none;">Login</a>
@@ -70,5 +83,13 @@
       </div>
     </form>
   </div>
+
+  <script>
+    document.querySelector('input[name="password"]').addEventListener('input', function () {
+      this.value = this.value.replace(/\s/g, '');
+    });
+  </script>
+
 </body>
+
 </html>

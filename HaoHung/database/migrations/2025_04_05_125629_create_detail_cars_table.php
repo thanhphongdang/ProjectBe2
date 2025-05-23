@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('detail_cars', function (Blueprint $table) {
             $table->id('ID_detail_car');
             $table->foreignId('ID_Car')
-            ->constrained('products','ID_Car')
+            ->constrained('warehouses','id')
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->string('Engine_Type');

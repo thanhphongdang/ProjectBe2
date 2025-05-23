@@ -64,18 +64,20 @@ class WarehouseController extends Controller
         ]);
     }
 
+     
+
     public function store(Request $request)
-{
-    $product = Product::find($request->product_id);
+    {
+        $product = Product::find($request->product_id);
 
-    if ($product->stock <= 0) {
-        // Gửi email cho admin
-        Notification::route('mail', 'kybui09@gmail.com')
-            ->notify(new OutOfStockNotification($product));
+        if ($product->stock <= 0) {
+            // Gửi email cho admin
+            Notification::route('mail', 'kybui09@gmail.com')
+                ->notify(new OutOfStockNotification($product));
 
-        return back()->with('error', 'Sản phẩm đã hết hàng.');
+            return back()->with('error', 'Sản phẩm đã hết hàng.');
+        }
+
+        // Tiếp tục xử lý đặt hàng
     }
-
-    // Tiếp tục xử lý đặt hàng
-}
 }
