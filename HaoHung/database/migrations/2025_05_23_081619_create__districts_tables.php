@@ -4,20 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('min_maps', function (Blueprint $table) {
+        Schema::create('districts', function (Blueprint $table) {
             $table->id();
-            $table->string('Name_Area')->unique();
-            $table->string('Address');
-            $table->string('district')->nullable();
-            $table->string('type')->nullable();
+            $table->string('name');
+            $table->foreignId('region_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-        });
+        });        
     }
 
     /**
@@ -25,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('min_maps');
+        Schema::dropIfExists('districts');
     }
 };

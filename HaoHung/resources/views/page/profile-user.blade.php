@@ -231,29 +231,42 @@
                             <div class="user_profile_wrapper_top card">
                                 <div class="user_profile_top_bg"></div>
                                 <div class="user_profile_top_des">
-                                    <div class="user_profile_img">
-                                        <img src="{{ asset('image/' . $user->image) }}" alt="" width="150">
-                                        <label for="upload-image" class="upload-icon"
-                                            style="position: absolute; bottom: 0; right: 0; background: rgba(0,0,0,0.6); border-radius: 50%; padding: 6px; cursor: pointer;">
+                                    <div class="user_profile_img" style="position: relative; display: inline-block;">
+                                        <!-- Ảnh đại diện -->
+                                        <img src="{{ asset('image/' . $user->image) }}" alt="" width="150"
+                                            style="border-radius: 50%;">
+
+                                        <!-- Nút icon upload giữa ảnh -->
+                                        <label for="image" class="upload-icon" style="
+                                            position: absolute;
+                                            top: 50%;
+                                            left: 50%;
+                                            transform: translate(-50%, -50%);
+                                            background: rgba(0, 0, 0, 0.6);
+                                            border-radius: 50%;
+                                            padding: 10px;
+                                            cursor: pointer;
+                                        ">
                                             <i class="fas fa-camera text-white"></i>
                                         </label>
 
-                                        <!-- Form upload ảnh ẩn -->
-                                        <form id="image-upload-form" action="#" method="POST"
+                                        <!-- Form upload ảnh -->
+                                        <form id="image-upload-form" action="{{ route('update.profile') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="image" id="upload-image" accept="image/*"
+                                            <input type="file" name="image" id="image" 
                                                 style="display: none;"
                                                 onchange="document.getElementById('image-upload-form').submit();">
                                         </form>
                                     </div>
+
                                     <div class="user_profile_text_top">
                                         <h3>{{ $user->name }}</h3>
                                         <p>2118 Thornridge Cir. Syracuse, Connecticut 35624</p>
                                     </div>
                                 </div>
-
                             </div>
+
 
                             <div class="card bg-white profile-content">
                                 <div class="row">

@@ -18,46 +18,48 @@
 				<ul id="search-results"></ul>
 			</div>
 		</div>
-           
+
 		<!-- navbar right -->
 		<div class="navbar-right">
 			<ul class="nav navbar-nav">
-				@auth
-				<!-- User Account -->
-				<li class="dropdown user-menu">
-					<button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown" aria-expanded="false">
-						 <img src="{{ asset('image/' . Auth::user()->image) }}" class="user-image" alt="User Image" />
-					</button>
-					<ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu">
-						<!-- User image -->
-						<li class="dropdown-header">
-							<div class="d-inline-block">
-								<h5>
-									<h5>{{ Auth::user()->name }}</h5>
-								</h5>
+				@if(Auth::check())
+					<!-- User Account -->
+					<li class="dropdown user-menu">
+						<button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="{{ asset('image/' . Auth::user()->image) }}" class="user-image" alt="User Image" />
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu">
+							<!-- User image -->
+							<li class="dropdown-header">
+								<div class="d-inline-block">
+									<h5>
+										<h5>{{ Auth::user()->name }}</h5>
+									</h5>
 
-								<p class="pt-2">
-									 <p>{{ Auth::user()->email }}</p>
-								</p>
-							</div>
-						</li>
-						<li>
-							<a href="{{ route('helo', ['id' => Auth::user()->id]) }}">
-								<i class="mdi mdi-account"></i> My Profile
-							</a>
-						</li>
-						<li class="dropdown-footer">
-							<form method="POST" action="{{ route('logout') }}">
-								@csrf
-								<button type="submit" class="dropdown-item">
-									<i class="mdi mdi-logout"></i> Log Out
-								</button>
-							</form>
+									<p class="pt-2">
+									<p>{{ Auth::user()->email }}</p>
+									</p>
+								</div>
+							</li>
+							<li>
+								<a href="{{ route('helo', ['id' => Auth::user()->id]) }}">
+									<i class="mdi mdi-account"></i> My Profile
+								</a>
+							</li>
+							<li class="dropdown-footer">
+								<form method="POST" action="{{ route('logout') }}">
+									@csrf
+									<button type="submit" class="dropdown-item">
+										<i class="mdi mdi-logout"></i> Log Out
+									</button>
+								</form>
 
-						</li>
-					</ul>
-				</li>
-				@endauth
+							</li>
+						</ul>
+					</li>
+				@else
+					<p>Chưa đăng nhập</p>
+				@endif
 				<li class="dropdown notifications-menu custom-dropdown">
 					<button class="dropdown-toggle notify-toggler custom-dropdown-toggler">
 						<i class="mdi mdi-bell-ring-outline"></i>

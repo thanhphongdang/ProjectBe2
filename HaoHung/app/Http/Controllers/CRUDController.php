@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 /**
@@ -310,8 +311,8 @@ class CRUDController extends Controller
 
         return view('pay.checkout', compact('amount', 'momoQr', 'bankQr'));
     }
-   
-     public function ForgetPassword()
+
+    public function ForgetPassword()
     {
         return view('page.forgetPassword');
     }
@@ -337,13 +338,36 @@ class CRUDController extends Controller
         return redirect("login")->withSuccess('Password updated successfully. Please sign in.');
     }
 
-    // public function header($id) {
+    public function updateAvatar(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+        ]);
 
-    //     $user = User::find($id);
+        $user = auth()->user();
 
-    //     $data = [
-    //         'user' => $user
-    //     ];
-    //     return view('desgin.header', $data);
-    // }
+        // Nếu có ảnh cũ thì xóa
+        if ($user->image && file_exists(public_path('image/' . $user->image))) {
+            unlink(public_path('image/' . $user->image));
+        }
+
+        // Lưu ảnh mới vào thư mục public/image
+        $file = $request->file('image');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('image'), $filename);
+
+        // Cập nhật cột image trong DB
+        $user->update([
+            'image' => $filename
+        ]);
+
+        return back()->with('success', 'Ảnh đại diện đã được cập nhật.');
+    }
+    
+    public function header()
+{
+    return view('outside.header');
+}
+
+
 }

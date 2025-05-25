@@ -5,7 +5,7 @@
     <li><a href="#">Categories</a></li>
     <li><a href="#">Make an Appointment</a></li>
     <li><a href="#">Shopping Cart</a></li>
-    <li><a href="#">Map</a></li>
+    <li><a href="{{ route('map') }}">Map</a></li>
     <li><a href="#">Customer Support</a></li>
     <li><a href="#">Introduce</a></li>
     <li>
@@ -24,7 +24,7 @@
       <li class="dropdown-header">
         <div class="d-inline-block">
         <h5>
-          <h5>{{ Auth::user()->name }}</h5>
+          <h5>{{Auth::user()->name }}</h5>
         </h5>
 
         <p class="pt-2">

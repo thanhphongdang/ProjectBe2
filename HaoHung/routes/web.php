@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\CRUDController;
+use App\Http\Controllers\CustomerController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\DetailCarController;
+use App\Http\Controllers\MinMapController;
+use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
+use App\Http\Controllers\SocialController;
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
@@ -21,7 +25,7 @@ Route::get('/', function () {
 
 Route::get('navbar',[CRUDController::class, 'navbar']);
 Route::get('footer',[CRUDController::class, 'footer']);
-Route::get('header',[CRUDController::class, 'header']);
+Route::get('/header',[CRUDController::class, 'header'])->middleware('auth');
 
 
 //Sign
@@ -50,7 +54,7 @@ Route::post('/logout', [CRUDController::class, 'destroy'])->name('logout');
 Route::get('forgetPassword', [CRUDController::class, 'ForgetPassword'])->name('forgetPassword.sign');
 Route::post('forgetPassword', [CRUDController::class, 'postUpdatePassword'])->name('user.postUpdatePassword');
 
-
+Route::post('updateimage',[CRUDController::class, 'updateAvatar'])->name('update.profile');
 // Route::get('admin', [CRUDController::class,'header'])->name('helo');
 
 //Chi thong tin lay mot minh admin
@@ -93,5 +97,18 @@ Route::get('/checkout', [CRUDController::class, 'showCheckout'])->name('checkout
 
 Route::get('detail',[DetailCarController::class, 'detailAdd'])->name('detail.add');
 Route::post('detail',[DetailCarController::class, 'postAddDetails'])->name('add.detail');
+
+//map 
+Route::get('/map', [MinMapController::class, 'index'])->name('map');
+Route::post('/map/search', [MinMapController::class, 'search'])->name('map.search');
+
+
+//login  Facebook
+// web.php
+
+Route::get('/auth/facebook', [SocialController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('/auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
+
+
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';

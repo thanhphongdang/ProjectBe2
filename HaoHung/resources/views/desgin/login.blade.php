@@ -71,7 +71,13 @@
         <input type="submit" class="btn btn-primary" value="Login">
       </div>
     </form>
+     <div class="d-flex justify-content-center mt-3 gap-2">
+    <a href="{{ route('login.facebook') }}" class="btn btn-primary" style="background-color: #3b5998;">
+      <i class="fab fa-facebook-f me-2"></i> Login with Facebook
+    </a>
   </div>
+  </div>
+ 
 
 </body>
 <!-- #region -->

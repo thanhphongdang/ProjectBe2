@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://0773-2402-800-fe4f-2f86-30d4-98f1-66f8-3c05.ngrok-free.app'),
 
     /*
     |--------------------------------------------------------------------------
@@ -122,5 +122,9 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+    
 
 ];
+ if (App::environment('local')) {
+    \URL::forceScheme('https');
+}

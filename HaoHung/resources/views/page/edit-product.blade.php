@@ -76,7 +76,13 @@
                                                         <div class="ec-vendor-upload-detail">
 
                                                             @csrf
+
+                                                            
                                                             <input name="id" type="hidden" value="{{$user->id}}">
+
+
+
+
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail4" class="form-label">Update
                                                                     Name</label>
