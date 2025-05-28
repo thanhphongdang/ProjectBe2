@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MinMap;
+use App\Models\Agency;
 
 class MinMapController extends Controller
 {
@@ -15,7 +15,7 @@ class MinMapController extends Controller
 
     public function search(Request $request)
     {
-        $query = MinMap::query();
+        $query = Agency::query();
 
     // Không cần where('region_id', ...) nữa
     if ($request->district) {

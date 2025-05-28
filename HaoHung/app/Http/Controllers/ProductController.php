@@ -107,7 +107,7 @@ class ProductController extends Controller
         $category = urldecode($category);
         $category = trim($category);
         $products = Product::whereRaw('LOWER(car_Company) LIKE ?', ['%' . strtolower($category) . '%'])->get();
-        return view('page.index', [
+        return view('page.Index', [
             'products' => $products,
             'currentCategory' => $category
         ]);

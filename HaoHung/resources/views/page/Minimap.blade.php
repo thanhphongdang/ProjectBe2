@@ -52,7 +52,7 @@
     <ul class="nav-list">
       <li><a href="{{ route('product') }}">Home</a></li>
       <li><a href="#">Categories</a></li>
-      <li><a href="#">Make an Appointment</a></li>
+      <li><a href="{{ route('makeappointment') }}">Make an Appointment</a></li>
       <li><a href="#">Shopping Cart</a></li>
       <li><a href="{{ route('map') }}">Map</a></li>
       <li><a href="#">Customer Support</a></li>

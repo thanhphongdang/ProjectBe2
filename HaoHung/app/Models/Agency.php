@@ -7,12 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agency extends Model
 {
     //
-    protected $fillable = [
-        'name',
-        'region',
-        'district',
-        'type',
-        'address',
-        'google_map_embed'
-    ];
+    public function district() {
+        return $this->belongsTo(District::class);
+    }
 }

@@ -27,7 +27,7 @@ return new class extends Migration {
           
 
             $table->foreignID('ID_Sale')
-                ->constrained('sales', 'ID_Sale')
+                ->constrained('sales', 'id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

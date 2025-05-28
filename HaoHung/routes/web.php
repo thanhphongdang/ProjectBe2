@@ -11,6 +11,7 @@ use App\Http\Controllers\DetailCarController;
 use App\Http\Controllers\MinMapController;
 use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\MakeAnAppointmentController;
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
@@ -109,6 +110,8 @@ Route::post('/map/search', [MinMapController::class, 'search'])->name('map.searc
 Route::get('/auth/facebook', [SocialController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('/auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
 
-
+//make appointment
+Route::get('make-appointment',[MakeAnAppointmentController::class,'Make_appointment'])->name('makeappointment'); 
+Route::post('make-appointment', [MakeAnAppointmentController::class,'store'])->name('make.appointment');
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';

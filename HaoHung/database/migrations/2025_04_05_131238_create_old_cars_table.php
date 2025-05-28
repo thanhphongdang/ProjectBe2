@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('Countries');
             $table->integer('Quantity');
             $table->foreignId('ID_Sale')
-            ->constrained('sales','ID_Sale')
+            ->constrained('sales','id')
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->timestamps();
