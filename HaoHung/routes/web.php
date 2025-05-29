@@ -93,6 +93,7 @@ Route::get('list-product/delete/{id}', [ProductController::class, 'deleteProduct
 
 Route::get('list-product', [WarehouseController::class, 'listProduct'])->name('listproduct');
 Route::post('post-warehouse', [WarehouseController::class, 'addInwarehouse'])->name('post.warehouse');
+Route::get('tax/{id}', [WarehouseController::class, 'showTax'])->name('tax');
 
 //sale
 Route::get('voucher', [SaleController::class, 'sale_List'])->name('sale.list');

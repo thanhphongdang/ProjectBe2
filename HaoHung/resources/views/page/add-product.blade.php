@@ -99,7 +99,7 @@
                                                                     <option value="Germany">Germany</option>
                                                                     <option value="Japan">Japan</option>
                                                                     <option value="America">America</option>
-                                                                    <option value="Việt">Việt Nam</option>
+                                                                    <option value="Việt Nam">Việt Nam</option>
                                                                     <option value="Bazil">Bazil</option>
                                                                     <option value="England">England</option>
                                                                 </select>

@@ -7,7 +7,7 @@
     <li><a href="#">Shopping Cart</a></li>
     <li><a href="{{ route('map') }}">Map</a></li>
     <li><a href="#">Customer Support</a></li>
-    <li><a href="#">Introduce</a></li>
+    <li><a href="#">Tax calculation</a></li>
     <li><a href="{{ route('chat.customer') }}">Chat</a></li>
     <li>
     <a href="{{ route('cart.view') }}">

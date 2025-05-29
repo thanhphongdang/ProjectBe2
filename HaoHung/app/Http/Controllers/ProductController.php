@@ -20,6 +20,7 @@ class ProductController extends Controller
     public function products()
     {
         //
+        $warehouse = warehouse::all();
         $products = Product::all();
         return view('page.Index', compact('products'));
     }

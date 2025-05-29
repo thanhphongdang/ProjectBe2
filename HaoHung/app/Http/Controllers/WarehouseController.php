@@ -98,4 +98,15 @@ class WarehouseController extends Controller
 
         return back()->with('success', 'Cập nhật số lượng thành công.');
     }
+
+    public function showTax($id)
+    {
+        $product = Product::findOrFail($id);
+
+        $tax = $product->getTax();
+        $priceWithTax = $product->getPriceWithTax();
+
+        return view('page.Tax-car', compact('product', 'tax', 'priceWithTax'));
+    }
+
 }

@@ -17,5 +17,5 @@ class warehouse extends Model
         'Quantity',
     ];
 
-    
+  
 }
