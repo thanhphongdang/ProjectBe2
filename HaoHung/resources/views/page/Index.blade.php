@@ -262,7 +262,10 @@
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+                    <form action="{{ route('cart.add') }}" method="POST">
+                        @csrf
                     <div class="product-card">
+                        <input type="hidden" name="id" value="{{ $product->Id_Products }}">
                         <img src="{{ asset('image/' . $product->Image) }}" alt="{{ $product->name_Car }}">
                         <h3>{{ $product->Name_Car }}</h3>
                         <p>{{ $product->Car_Company }}</p>
@@ -272,8 +275,10 @@
                         <div>
                             <button>View</button>
                             <button>Compare</button>
+                            <button type="submit">Add to Cart</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             @endforeach
         </div>

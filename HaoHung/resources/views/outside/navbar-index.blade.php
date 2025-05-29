@@ -8,7 +8,15 @@
     <li><a href="{{ route('map') }}">Map</a></li>
     <li><a href="#">Customer Support</a></li>
     <li><a href="#">Introduce</a></li>
-     <li><a href="{{ route('chat.customer') }}">Chat</a></li>
+    <li><a href="{{ route('chat.customer') }}">Chat</a></li>
+    <li>
+    <a href="{{ route('cart.view') }}">
+        🛒 Giỏ hàng 
+        ({{ \App\Models\Cart::where('ID_Customer', auth()->id())->sum('Quantity') }})
+    </a>
+</li>
+
+    </li>
     <li>
       <input type="text" placeholder="Search...">
       <button>🔍</button>
@@ -41,7 +49,7 @@
       <li class="dropdown-footer">
         <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <button type="submit" class="dropdown-item text-white" >
+        <button type="submit" class="dropdown-item text-white">
           <i class="mdi mdi-logout"></i> Log Out
         </button>
         </form>

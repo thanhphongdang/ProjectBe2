@@ -13,6 +13,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\MakeAnAppointmentController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CustomerReviewsController;
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
@@ -25,9 +27,9 @@ Route::get('/', function () {
 //     })->name('dashboard');
 // });
 
-Route::get('navbar',[CRUDController::class, 'navbar']);
-Route::get('footer',[CRUDController::class, 'footer']);
-Route::get('/header',[CRUDController::class, 'header'])->middleware('auth');
+Route::get('navbar', [CRUDController::class, 'navbar']);
+Route::get('footer', [CRUDController::class, 'footer']);
+Route::get('/header', [CRUDController::class, 'header'])->middleware('auth');
 
 
 //Sign
@@ -38,48 +40,48 @@ Route::get('login', [CRUDController::class, 'Login'])->name('Login');
 Route::post('login', [CRUDController::class, 'authUser'])->name('user.authUser');
 //lay danh sach
 Route::get('admin', [CRUDController::class, 'index'])->name('Demo');
-Route::get('user-list', [CRUDController::class,'user_list'])->name('user.list');
+Route::get('user-list', [CRUDController::class, 'user_list'])->name('user.list');
 // Xoa User
 // Route::get('delete', [CRUDController::class,'deleteUser'])->name('user.delete');
 // Route sử dụng phương thức DELETE
 Route::delete('user/{id}', [CRUDController::class, 'deleteUser'])->name('user.delete');
 
 //Upadte User
-Route::get('update', [ CRUDController::class,'updateUser'])->name('update.user');
-Route::post('update', [CRUDController::class,'postUpdateUser'])->name('post.update');
+Route::get('update', [CRUDController::class, 'updateUser'])->name('update.user');
+Route::post('update', [CRUDController::class, 'postUpdateUser'])->name('post.update');
 // add User
-Route::get('add-user', [CRUDController::class,'Add'])->name('user.add');
-Route::post('add-user', [CRUDController::class,'postAdd'])->name('post.add');
+Route::get('add-user', [CRUDController::class, 'Add'])->name('user.add');
+Route::post('add-user', [CRUDController::class, 'postAdd'])->name('post.add');
 
 Route::post('/logout', [CRUDController::class, 'destroy'])->name('logout');
 
 Route::get('forgetPassword', [CRUDController::class, 'ForgetPassword'])->name('forgetPassword.sign');
 Route::post('forgetPassword', [CRUDController::class, 'postUpdatePassword'])->name('user.postUpdatePassword');
 
-Route::post('updateimage',[CRUDController::class, 'updateAvatar'])->name('update.profile');
+Route::post('updateimage', [CRUDController::class, 'updateAvatar'])->name('update.profile');
 // Route::get('admin', [CRUDController::class,'header'])->name('helo');
 
 //Chi thong tin lay mot minh admin
 // Route::get('admin-user', [CRUDController::class,'Profile'])->name('admin');
-Route::get('admin-user/{id?}', [CRUDController::class,'Profile'])->name('helo');
-Route::get('admin-user/{id?}', [CRUDController::class,'ProfileUser'])->name('helo');
+Route::get('admin/{id?}', [CRUDController::class, 'Profile'])->name('heloo');
+Route::get('admin-user/{id?}', [CRUDController::class, 'ProfileUser'])->name('helo');
 
-Route::get('add-product',[ProductController::class,'addProduct'])->name('addProduct');
-Route::post('add-product',[ProductController::class,'store'])->name('post.product');
-Route::get('Index',[ProductController::class,'products'])->name('product');
+Route::get('add-product', [ProductController::class, 'addProduct'])->name('addProduct');
+Route::post('add-product', [ProductController::class, 'store'])->name('post.product');
+Route::get('Index', [ProductController::class, 'products'])->name('product');
 Route::get('product/{id}', [ProductController::class, 'moveToProduct'])->name('warehouse.move');
 
 Route::get('/products', [ProductController::class, 'products'])->name('products.index');
 Route::get('/products/category/{category}', [ProductController::class, 'filterByCategory'])->name('products.category');
-Route::get('update-product', [ ProductController::class,'updateProduct'])->name('update.product');
-Route::post('update-product', [ProductController::class,'postUpdateProduct'])->name('product.update');
+Route::get('update-product', [ProductController::class, 'updateProduct'])->name('update.product');
+Route::post('update-product', [ProductController::class, 'postUpdateProduct'])->name('product.update');
 
 Route::get('list-product/{id}', [ProductController::class, 'deleteProduct'])->name('delete.product');
 
 // Warehouse
 
-Route::get('list-product',[WarehouseController::class,'listProduct'])->name('listproduct');
-Route::post('post-warehouse',[WarehouseController::class,'addInwarehouse'])->name('post.warehouse');
+Route::get('list-product', [WarehouseController::class, 'listProduct'])->name('listproduct');
+Route::post('post-warehouse', [WarehouseController::class, 'addInwarehouse'])->name('post.warehouse');
 
 //sale
 Route::get('voucher', [SaleController::class, 'sale_List'])->name('sale.list');
@@ -97,8 +99,8 @@ Route::get('/checkout', [CRUDController::class, 'showCheckout'])->name('checkout
 
 // Details
 
-Route::get('detail',[DetailCarController::class, 'detailAdd'])->name('detail.add');
-Route::post('detail',[DetailCarController::class, 'postAddDetails'])->name('add.detail');
+Route::get('detail', [DetailCarController::class, 'detailAdd'])->name('detail.add');
+Route::post('detail', [DetailCarController::class, 'postAddDetails'])->name('add.detail');
 
 //map 
 Route::get('/map', [MinMapController::class, 'index'])->name('map');
@@ -112,16 +114,34 @@ Route::get('/auth/facebook', [SocialController::class, 'redirectToFacebook'])->n
 Route::get('/auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
 
 //make appointment
-Route::get('make-appointment',[MakeAnAppointmentController::class,'Make_appointment'])->name('makeappointment'); 
-Route::post('make-appointment', [MakeAnAppointmentController::class,'store'])->name('make.appointment');
+Route::get('make-appointment', [MakeAnAppointmentController::class, 'Make_appointment'])->name('makeappointment');
+Route::post('make-appointment', [MakeAnAppointmentController::class, 'store'])->name('make.appointment');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/customer/chat', [MessageController::class, 'index'])->name('chat.customer');
     Route::post('/customer/chat/send', [MessageController::class, 'send'])->name('chat.customer.send');
 
     // Admin chat routes
-    Route::get('/admin/chat', [MessageController::class, 'adminIndex'])->name('chat.admin');
-    Route::post('/admin/chat/send', [MessageController::class, 'adminSend'])->name('chat.admin.send');
+
 });
+Route::get('chat', [MessageController::class, 'adminIndex'])->name('chat.admin');
+Route::post('/admin/chat/send', [MessageController::class, 'adminSend'])->name('chat.admin.send');
+// Cart
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.view');
+
+
+// Hiển thị dữ liệu Customer Reviews
+Route::get('AdminTraLoiDanhGia', [CustomerReviewsController::class, 'customerReviews'])->name('home');
+
+Route::post('/admin/customer-reviews/reply', [CustomerReviewsController::class, 'reply'])->name('customerReviews.reply');
+
+
+   
+
+// Route::post('/customer-reviews/reply', [CustomerReviewController::class, 'reply'])->name('customerReviews.reply');
+
+Route::delete('delete/{id}', [CustomerReviewsController::class, 'deleteCustomerReviews'])->name('review.deleteCustomerReviews');
+
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';

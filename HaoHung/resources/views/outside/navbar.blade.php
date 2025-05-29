@@ -119,7 +119,7 @@
 						</ul>
 					</div>
 				</li>
-                 
+
 
 				<li class="has-sub">
 					<a class="sidenav-item-link" href="javascript:void(0)">
@@ -140,22 +140,38 @@
 					</div>
 					<hr>
 				</li>
-				<!-- Chat -->
+				<!--Chat -->
 				<li class="has-sub">
-							<a class="sidenav-item-link" href="javascript:void(0)">
-							
-								<span class="nav-text">Chat</span> <b class="caret"></b>
-							</a>
-							<div class="collapse">
-								<ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
-									<li class="">
-										<a class="sidenav-item-link" href="{{ route('chat.admin') }}">
-											<span class="nav-text">Chat</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
+					<a class="sidenav-item-link" href="javascript:void(0)">
+						<span class="nav-text">Chat</span> <b class="caret"></b>
+					</a>
+					<div class="collapse">
+						<ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+							<li class="">
+								<a class="sidenav-item-link" href="{{ route('chat.admin') }}">
+									<span class="nav-text">Chat</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<!-- Customer Reviews -->
+				<li class="has-sub">
+					<a class="sidenav-item-link" href="javascript:void(0)">
+						<i class="mdi mdi-account-multiple-outline"></i>
+						<span class="nav-text">Feedback Review</span> <b class="caret"></b>
+					</a>
+					<div class="collapse">
+						<ul class="sub-menu" id="users" data-parent="#sidebar-menu">
+							<li>
+								<a class="sidenav-item-link" href="{{ route('home') }}">
+									<span class="nav-text">Feedback Review</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<hr>
+				</li>
 
 				<!-- Invoice -->
 				<!-- <li class="has-sub">

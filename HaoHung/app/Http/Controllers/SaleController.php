@@ -68,6 +68,6 @@ class SaleController extends Controller
        $sale->description = $input['description'];
        $sale->save();
 
-        return redirect("voucher")->withSuccess('You have signed-in');
+        return redirect("voucher")->with('success', 'Add suddessfully !');
     }
 }

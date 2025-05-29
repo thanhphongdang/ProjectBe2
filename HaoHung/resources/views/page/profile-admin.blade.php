@@ -63,10 +63,10 @@
                                 <div class="user_profile_top_bg"></div>
                                 <div class="user_profile_top_des">
                                     <div class="user_profile_img">
-                                        <img src="{{ asset('image/' . $user->image) }}" alt="" width="150">
+                                        <img src="{{ asset('image/' . $users->image) }}" alt="" width="150">
                                     </div>
                                     <div class="user_profile_text_top">
-                                        <h3>{{ $user->name }}</h3>
+                                        <h3>{{ $users->name }}</h3>
                                         <p>2118 Thornridge Cir. Syracuse, Connecticut 35624</p>
                                     </div>
                                 </div>

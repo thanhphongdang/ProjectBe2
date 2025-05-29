@@ -44,7 +44,7 @@
 								</div>
 							</li>
 							<li>
-								<a href="{{ route('helo', ['id' => Auth::user()->id]) }}">
+								<a href="{{ route('heloo', ['id' => Auth::user()->id]) }}">
 									<i class="mdi mdi-account"></i> My Profile
 								</a>
 							</li>

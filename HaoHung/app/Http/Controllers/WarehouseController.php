@@ -36,7 +36,7 @@ class WarehouseController extends Controller
             // $image = $request->file('image');
             //  dd($imageName);
             $imageName = time() . "_" . $data["Image"]->getClientOriginalName();
-            $data["Image"]->move(public_path('Image'), $imageName);
+            $data["Image"]->move(public_path('image'), $imageName);
         }
 
         // Tạo user

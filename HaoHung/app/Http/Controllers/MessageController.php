@@ -70,6 +70,8 @@ class MessageController extends Controller
 
     public function adminIndex(Request $request)
     {
+
+        // // dd('hello');
         $admin = Auth::user();
 
         if (!$admin || $admin->role !== 1) {
@@ -82,17 +84,18 @@ class MessageController extends Controller
             ->select('sender_id')
             ->distinct()
             ->get()
-            ->map(fn($msg) => $msg->sender);
+            ->map(fn($msg) => $msg->sender)
+            ->filter(); // lọc bỏ null nếu có
 
         // Lấy ID khách hàng được chọn (nếu có)
-        $customerId = $request->get('customer_id') ?? $customers->first()->id ?? null;
+        $customerId = $request->get('customer_id') ?? $customers->first()?->id;
 
-        // Lấy tin nhắn giữa admin và customer được chọn
         $messages = [];
         $selectedCustomer = null;
 
         if ($customerId) {
             $selectedCustomer = User::find($customerId);
+
             $messages = Message::where(function ($query) use ($admin, $customerId) {
                 $query->where('sender_id', $admin->id)->where('receiver_id', $customerId);
             })->orWhere(function ($query) use ($admin, $customerId) {
@@ -100,7 +103,8 @@ class MessageController extends Controller
             })->orderBy('created_at')->get();
         }
 
-        return view('page.admin-chat', compact('customers', 'messages', 'selectedCustomer'));
+         return view('page.cc', compact('admin', 'customers', 'messages', 'selectedCustomer'));
+        // return view('page.cc');
     }
 
 
@@ -126,25 +130,25 @@ class MessageController extends Controller
     //     return redirect()->route('chat.admin');
     // }
     public function adminSend(Request $request)
-{
-    $admin = Auth::user();
+    {
+        $admin = Auth::user();
 
-    if (!$admin || $admin->role !== 1) {
-        abort(403, 'Unauthorized access.');
+        if (!$admin || $admin->role !== 1) {
+            abort(403, 'Unauthorized access.');
+        }
+
+        $request->validate([
+            'message' => 'required|string',
+            'receiver_id' => 'required|integer|exists:users,id',
+        ]);
+
+        Message::create([
+            'sender_id' => $admin->id,
+            'receiver_id' => $request->receiver_id,
+            'message' => $request->message,
+        ]);
+
+        return redirect()->route('chat.admin', ['customer_id' => $request->receiver_id]);
     }
-
-    $request->validate([
-        'message' => 'required|string',
-        'receiver_id' => 'required|integer|exists:users,id',
-    ]);
-
-    Message::create([
-        'sender_id' => $admin->id,
-        'receiver_id' => $request->receiver_id,
-        'message' => $request->message,
-    ]);
-
-    return redirect()->route('chat.admin', ['customer_id' => $request->receiver_id]);
-}
 
 }

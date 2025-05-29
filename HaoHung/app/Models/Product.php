@@ -22,4 +22,7 @@ class Product extends Model
     {
         return $this->belongsTo(Warehouse::class, 'ID_Car');
     }
+    protected $primaryKey = 'Id_Products'; // <-- thêm dòng này
+    public $incrementing = true;
+    protected $keyType = 'int';
 }

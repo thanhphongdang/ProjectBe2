@@ -18,7 +18,7 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->foreignId('ID_Customer')
-            ->constrained("customers", "ID_Customer")
+            ->constrained("users", "id")
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string('Name_Car');

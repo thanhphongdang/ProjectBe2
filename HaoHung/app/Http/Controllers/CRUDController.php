@@ -275,7 +275,7 @@ class CRUDController extends Controller
         $user = User::find($id);
 
         $data = [
-            'user' => $user
+            'users' => $user
         ];
         return view('page.profile-admin', $data);
     }

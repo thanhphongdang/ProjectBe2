@@ -143,7 +143,7 @@
                                                                 <label for="inputEmail5" class="form-label">Quantity</label>
                                                                 <input type="number" name="Quantity"
                                                                     class="form-control slug-title" placeholder="Quantity"
-                                                                    id="Quantity" value="{{$user->Price}}">
+                                                                    id="Quantity" value="{{$user->Quantity}}">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="product_add_cancel_button">
