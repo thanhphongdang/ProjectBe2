@@ -36,8 +36,47 @@ class CartController extends Controller
 
     public function showCart()
     {
+        //    $product = Product::where('id', 1)->first();
+        $product = Product::find(1);
         $cartItems = Cart::where('ID_Customer', auth()->id())->get();
-        return view('cart.add-to-cart', compact('cartItems'));
+        return view('cart.add-to-cart')
+            ->with('cartItems', $cartItems)
+            ->with('product', $product);
+
     }
+
+    public function deleteCart($id)
+    {
+        $cartItem = Cart::find($id);
+
+        if (!$cartItem) {
+            return redirect()->route('cart.view')->withErrors('Sản phẩm không tồn tại trong giỏ hàng.');
+        }
+
+        // Nếu số lượng > 1 thì giảm đi 1
+        if ($cartItem->Quantity > 1) {
+            $cartItem->Quantity -= 1;
+            $cartItem->save();
+        } else {
+            // Nếu chỉ còn 1 thì xóa dòng luôn
+            $cartItem->delete();
+        }
+
+        return redirect()->route('cart.view')->withSuccess('Đã cập nhật giỏ hàng.');
+    }
+
+
+public function clearCart()
+{
+    Cart::where('ID_Customer', auth()->id())->delete();
+
+    return redirect()->route('cart.view')->with('success', 'Đã xoá toàn bộ giỏ hàng.');
+}
+
+
+
+
+
+
 
 }

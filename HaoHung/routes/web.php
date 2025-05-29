@@ -131,6 +131,14 @@ Route::post('/admin/chat/send', [MessageController::class, 'adminSend'])->name('
 // Cart
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.view');
+Route::post('cart/delete/{id}', [CartController::class, 'deleteCart'])->name('cart.delete');
+//xoa het tat ca trong gio hang
+Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+
+
+
+
+
 
 
 // Hiển thị dữ liệu Customer Reviews

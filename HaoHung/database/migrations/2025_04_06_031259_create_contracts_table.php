@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id('ID_Contract');
-            $table->foreignId('ID_Oder')
-            ->constrained('oders','ID_Oder')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+            // $table->foreignId('ID_Oder')
+            // ->constrained('oders','ID_Oder')
+            // ->onDelete('cascade')
+            // ->onUpdate('cascade');
             $table->decimal('Sum_Transaction',15);
             $table->string('Start_Transaction');
             $table->timestamp('Contract_Date')->useCurrent();
