@@ -154,28 +154,47 @@
 
     <!-- custom js -->
     <script src="assets/js/custom.js"></script>
+
     @if (session('success'))
-        <div class="toast-container position-fixed top-50 start-50 translate-middle p-3">
-            <div class="toast align-items-center text-bg-success border-0 show" role="alert">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        {{ session('success') }}
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
+    <div class="toast-container position-fixed top-50 start-50 translate-middle p-3">
+        <div class="toast align-items-center text-bg-success border-0 show" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session('success') }}
                 </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
             </div>
         </div>
-    @endif
-    <script>
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="toast-container position-fixed top-50 start-50 translate-middle p-3">
+        <div class="toast align-items-center text-bg-danger border-0 show" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+@endif
+
+<script>
     document.addEventListener('DOMContentLoaded', function () {
-        var toastEl = document.querySelector('.toast');
-        if (toastEl) {
-            var toast = new bootstrap.Toast(toastEl, { delay: 2000 });
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+        toastElList.forEach(function (toastEl) {
+            var toast = new bootstrap.Toast(toastEl, { delay: 3000 });
             toast.show();
-        }
+        });
     });
 </script>
+
 
 
 </body>

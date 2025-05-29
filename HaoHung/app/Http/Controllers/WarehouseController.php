@@ -9,6 +9,9 @@ use Hash;
 use App\Models\Product;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OutOfStockNotification;
+
+use App\Models\User;
+// use App\Notifications\OutOfStockNotification;
 class WarehouseController extends Controller
 {
     //
@@ -64,7 +67,7 @@ class WarehouseController extends Controller
         ]);
     }
 
-     
+
 
     public function store(Request $request)
     {
@@ -79,5 +82,20 @@ class WarehouseController extends Controller
         }
 
         // Tiếp tục xử lý đặt hàng
+    }
+    public function updateQuantity($id, $newQty)
+    {
+        $product = Product::findOrFail($id);
+        $product->quantity = $newQty;
+        $product->save();
+
+        if ($newQty <= 0) {
+            $admin = User::where('role', 'admin')->first();
+            if ($admin) {
+                $admin->notify(new OutOfStockNotification($product));
+            }
+        }
+
+        return back()->with('success', 'Cập nhật số lượng thành công.');
     }
 }

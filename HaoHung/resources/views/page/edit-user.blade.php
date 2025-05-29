@@ -76,7 +76,9 @@
                                                         <div class="ec-vendor-upload-detail">
 
                                                             @csrf
-                                                            <input name="id" type="hidden" value="{{$user->id}}">
+                                                            <input name="updated_at" type="hidden"
+                                                                value="{{ $user->updated_at }}">
+                                                            <input name="id" type="hidden" value="{{ $user->id }}">
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail4" class="form-label">Update
                                                                     Name</label>
@@ -186,10 +188,33 @@
     <script src="assets/js/custom.js"></script>
 
     <script>
-  document.querySelector('input[name="password"]').addEventListener('input', function () {
-    this.value = this.value.replace(/\s/g, '');
-  });
-</script>
+        document.querySelector('input[name="password"]').addEventListener('input', function () {
+            this.value = this.value.replace(/\s/g, '');
+        });
+    </script>
+
+    @if (session('error'))
+        <div class="toast-container position-fixed top-50 start-50 translate-middle p-3 z-3">
+            <div class="toast text-bg-danger border-0 show" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('error') }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            toastElList.forEach(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+                toast.show();
+            });
+        });
+    </script>
 </body>
 
 

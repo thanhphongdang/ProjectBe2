@@ -10,11 +10,11 @@ use Illuminate\Notifications\Notification;
 class OutOfStockNotification extends Notification
 {
     use Queueable;
-
+     protected $product;
     /**
      * Create a new notification instance.
      */
-    protected $product;
+   
 
     public function __construct($product)
     {

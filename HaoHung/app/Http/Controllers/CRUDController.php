@@ -122,11 +122,18 @@ class CRUDController extends Controller
      */
     public function deleteUser(Request $request, $id)
     {
-        // dd("Minh Hieu");
-        // $user_id = $request->get('id');
-        $user = User::destroy($id);
+        $user = User::find($id);
 
-        return redirect("user-list")->withSuccess('You have signed-in');
+        if (!$user) {
+            // Nếu không tìm thấy user, quay lại và hiển thị thông báo lỗi
+            return redirect()->back()->withErrors(['msg' => 'Người dùng không tồn tại hoặc đã bị xóa.']);
+        }
+
+        // Nếu tìm thấy, tiến hành xóa
+        $user->delete();
+
+        // Quay lại danh sách với thông báo thành công
+        return redirect('user-list')->with('success', 'Bạn đã xóa người dùng thành công.');
     }
 
     /**
@@ -145,16 +152,23 @@ class CRUDController extends Controller
     public function postUpdateUser(Request $request)
     {
         $input = $request->all();
-        // dd($input);
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $input['id'],
             'password' => 'nullable|min:6',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'updated_at' => 'required',
         ]);
 
         $user = User::find($input['id']);
-        // dd($user);
+
+        // Kiểm tra nếu dữ liệu đã bị thay đổi bởi tab khác
+        if ($user->updated_at->toDateTimeString() !== $input['updated_at']) {
+            return redirect()->back()->with('error', 'Thông tin người dùng đã bị thay đổi ở nơi khác. Vui lòng tải lại trang trước khi chỉnh sửa.');
+        }
+
+        // Xử lý ảnh nếu có
         if ($request->hasFile('image')) {
             if ($user->image && file_exists(public_path('image/' . $user->image))) {
                 unlink(public_path('image/' . $user->image));
@@ -164,9 +178,10 @@ class CRUDController extends Controller
             $user->image = $imageName;
         }
 
+        // Cập nhật thông tin
         $user->name = $input['name'];
-        $user->address = $input['address'];
-        $user->phone = $input['phone'];
+        $user->address = $input['address'] ?? null;
+        $user->phone = $input['phone'] ?? null;
         $user->email = $input['email'];
 
         if (!empty($input['password'])) {
@@ -175,7 +190,7 @@ class CRUDController extends Controller
 
         $user->save();
 
-        return redirect("user-list")->withSuccess('User updated successfully');
+        return redirect("user-list")->with('success', 'Cập nhật người dùng thành công.');
     }
     /*
      *
@@ -368,9 +383,10 @@ class CRUDController extends Controller
     {
         return view('outside.header');
     }
-    
 
-    public function loginAdmin(){
+
+    public function loginAdmin()
+    {
         return view('desgin.login-admin');
     }
 

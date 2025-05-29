@@ -15,6 +15,8 @@ use App\Http\Controllers\MakeAnAppointmentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerReviewsController;
+use App\Http\Controllers\OderController;
+
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
@@ -76,7 +78,7 @@ Route::get('/products/category/{category}', [ProductController::class, 'filterBy
 Route::get('update-product', [ProductController::class, 'updateProduct'])->name('update.product');
 Route::post('update-product', [ProductController::class, 'postUpdateProduct'])->name('product.update');
 
-Route::get('list-product/{id}', [ProductController::class, 'deleteProduct'])->name('delete.product');
+Route::get('list-product/delete/{id}', [ProductController::class, 'deleteProduct'])->name('delete.product');
 
 // Warehouse
 
@@ -135,6 +137,10 @@ Route::get('/cart', [CartController::class, 'showCart'])->name('cart.view');
 Route::get('AdminTraLoiDanhGia', [CustomerReviewsController::class, 'customerReviews'])->name('home');
 
 Route::post('/admin/customer-reviews/reply', [CustomerReviewsController::class, 'reply'])->name('customerReviews.reply');
+
+// Thông báo và theo dõi đơn hàng
+Route::get('/orders/{oder}', [OderController::class, 'showTracking'])->name('orders.tracking');
+
 
 
    

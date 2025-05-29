@@ -132,7 +132,7 @@ class ProductController extends Controller
             'Price' => 'required|numeric',
             'information' => 'nullable|string',
             'Image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'Quantity'=> 'required|integer',
+            'Quantity' => 'required|integer',
         ]);
 
         $product = warehouse::find($input['id']);
@@ -142,9 +142,9 @@ class ProductController extends Controller
             if ($product->Image && file_exists(public_path('image/' . $product->Image))) {
                 unlink(public_path('image/' . $product->Image));
             }
-             
+
             $imageName = time() . "_" . $input["Image"]->getClientOriginalName();
-           
+
             $input["Image"]->move(public_path('image'), $imageName);
             $product->Image = $imageName;
             //  dd($product->Image = $imageName);
@@ -163,14 +163,22 @@ class ProductController extends Controller
         return redirect("list-product")->withSuccess('Sản phẩm đã được cập nhật thành công.');
     }
 
-    public function deleteProduct(Request $request,$id)
+    public function deleteProduct(Request $request, $id)
     {
-        // dd("Minh Hieu");
-        // $id = $request->get('id');
-        $user = warehouse::destroy($id);
+        // Kiểm tra xem bản ghi có tồn tại không
+        $product = warehouse::find($id);
 
-        return redirect("list-product")->withSuccess('You have signed-in');
+        if (!$product) {
+            // Nếu không tồn tại, redirect về trang trước với thông báo lỗi
+            return redirect()->back()->withErrors(['msg' => 'Không có sản phẩm']);
+        }
+
+        // Nếu tồn tại, xóa bản ghi
+        $product->delete();
+
+        // Chuyển hướng về list-product với thông báo thành công
+        return redirect("list-product")->with('success', 'Bạn đã xóa sản phẩm thành công');
     }
-    
-    
+
+
 }
