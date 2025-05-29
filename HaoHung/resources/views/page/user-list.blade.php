@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 12:09:19 GMT -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Andshop - Admin Dashboard HTML Template.">
+
+    <title>ADMIN</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet">
+
+    <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" />
+    <!-- PLUGINS CSS STYLE -->
+    <link href="assets/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+    <!-- Data Tables -->
+    <link href='assets/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
+    <link href='assets/plugins/data-tables/responsive.datatables.min.css' rel='stylesheet'>
+
+    <!-- custom css -->
+    <link id="style.css" rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- FAVICON -->
+    <link href="assets/img/favicon.png" rel="shortcut icon" />
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+
+    @include('outside.header')
+
+    <!-- Sidebar / Navbar -->
+    @include('outside.navbar')
+
+    <!-- Main Content -->
+    @section('content')
+        <main class="main-content">
+            <div class="wrapper">
+                <div class="ec-page-wrapper">
+                    <div class="ec-content-wrapper">
+                        <div class="content">
+                            <div class="breadcrumb-wrapper breadcrumb-contacts">
+                                <div>
+                                    <h1>Customer list</h1>
+                                    <p class="breadcrumbs"><span><a href="{{ route('user.list') }}">Home</a></span>
+                                        <span><i class="mdi mdi-chevron-right"></i></span>Customer
+                                    </p>
+                                </div>
+                                <div>
+                                    <a href="{{ route('user.add') }}" class="btn btn-primary"> ADD
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12">
+                                    <div class="ec-cat-list card card-default">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="responsive-data-table" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Photo</th>
+                                                            <th>Full name</th>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
+                                                            <th>Address</th>
+                                                            <th>Status</th>
+                                                            <th>Joined</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        @foreach ($users as $user)
+                                                            <tr>
+                                                                <td>{{ $user->id }} </td>
+                                                                <td><img class="cat-thumb" src="image/{{$user->image}}"
+                                                                        alt="Product Image" /></td>
+                                                                <td> {{ $user->name }}</td>
+                                                                <td>{{ $user->email }}</td>
+                                                                <td>{{ $user->phone }}</td>
+                                                                <td>{{ $user->address }}</td>
+                                                                <td><span class="badge badge-success">Active</span></td>
+                                                                <td>{{ $user->created_at }}</td>
+                                                                <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-success">Info</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                                                            data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false" data-display="static">
+                                                                            <span class="sr-only">Info</span>
+                                                                        </button>
+                                                                        <div class="dropdown-menu">
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('update.user', ['id' => $user->id]) }}">Edit</a>
+                                                                            <!-- <a class="dropdown-item" href="{{ route('user.delete', ['id' => $user->id]) }}">Delete</a> -->
+                                                                             <form action="{{ route('user.delete', ['id' => $user->id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                              <button type="submit" class="dropdown-item" style="border: none; background: none; padding: 0; margin: 15; color: red;">
+                                                                                  Delete</button>
+                                                                              </form> 
+
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End Content -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    @endsection
+
+    <!-- Footer -->
+    @include('outside.footer')
+
+
+    <!-- Common Javascript -->
+    <script src="assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/plugins/simplebar/simplebar.min.js"></script>
+    <script src="assets/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+    <script src="assets/plugins/slick/slick.min.js"></script>
+
+    <!-- Data Tables -->
+    <script src='assets/plugins/data-tables/jquery.datatables.min.js'></script>
+    <script src='assets/plugins/data-tables/datatables.bootstrap5.min.js'></script>
+    <script src='assets/plugins/data-tables/datatables.responsive.min.js'></script>
+    <script src="assets/plugins/options-sidebar/optionswitcher.js"></script>
+
+    <!-- custom js -->
+    <script src="assets/js/custom.js"></script>
+</body>
+
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 12:09:19 GMT -->
+
+</html>
