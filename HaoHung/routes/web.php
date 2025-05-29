@@ -12,6 +12,7 @@ use App\Http\Controllers\MinMapController;
 use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\MakeAnAppointmentController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
@@ -113,5 +114,14 @@ Route::get('/auth/facebook/callback', [SocialController::class, 'handleFacebookC
 //make appointment
 Route::get('make-appointment',[MakeAnAppointmentController::class,'Make_appointment'])->name('makeappointment'); 
 Route::post('make-appointment', [MakeAnAppointmentController::class,'store'])->name('make.appointment');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/customer/chat', [MessageController::class, 'index'])->name('chat.customer');
+    Route::post('/customer/chat/send', [MessageController::class, 'send'])->name('chat.customer.send');
+
+    // Admin chat routes
+    Route::get('/admin/chat', [MessageController::class, 'adminIndex'])->name('chat.admin');
+    Route::post('/admin/chat/send', [MessageController::class, 'adminSend'])->name('chat.admin.send');
+});
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';

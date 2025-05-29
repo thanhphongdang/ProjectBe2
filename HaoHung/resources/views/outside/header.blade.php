@@ -32,9 +32,11 @@
 							<!-- User image -->
 							<li class="dropdown-header">
 								<div class="d-inline-block">
-									<h5>
+									@if(Auth::user()->role == 1)
 										<h5>{{ Auth::user()->name }}</h5>
-									</h5>
+									@else
+										<h5>Người dùng</h5> {{-- Hoặc để trống --}}
+									@endif
 
 									<p class="pt-2">
 									<p>{{ Auth::user()->email }}</p>

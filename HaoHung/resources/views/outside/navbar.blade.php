@@ -140,28 +140,22 @@
 					</div>
 					<hr>
 				</li>
-				<!-- Orders -->
-				<!-- <li class="has-sub">
+				<!-- Chat -->
+				<li class="has-sub">
 							<a class="sidenav-item-link" href="javascript:void(0)">
-								<i class="mdi mdi-cart-outline"></i>
-								<span class="nav-text">Orders</span> <b class="caret"></b>
+							
+								<span class="nav-text">Chat</span> <b class="caret"></b>
 							</a>
 							<div class="collapse">
 								<ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
 									<li class="">
-										<a class="sidenav-item-link" href="new-order.html">
-											<span class="nav-text">Order list</span>
+										<a class="sidenav-item-link" href="{{ route('chat.admin') }}">
+											<span class="nav-text">Chat</span>
 										</a>
 									</li>
-									<li class="">
-										<a class="sidenav-item-link" href="order-detail.html">
-											<span class="nav-text">Order Detail</span>
-										</a>
-									</li>
-									
 								</ul>
 							</div>
-						</li> -->
+						</li>
 
 				<!-- Invoice -->
 				<!-- <li class="has-sub">

@@ -1,57 +1,125 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <title>Nhắn tin với shop</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
     }
 
-    .sidebar {
-      width: 230px;
-      background-color: #e0e0e0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    body {
+      background-color: #f8f8f8;
+      color: #333;
     }
 
-    .sidebar img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #ccc;
+    .dropdown {
+      position: relative;
+      display: inline-block;
     }
 
-    .sidebar .name {
-      margin: 10px 0;
-      font-weight: bold;
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #222;
+      min-width: 200px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      overflow: hidden;
     }
 
-    .sidebar a {
-      text-decoration: none;
-      color: black;
-      padding: 10px;
-      display: block;
-      width: 100%;
-      border-radius: 5px;
-      margin-top: 5px;
-    }
-
-    .sidebar a.active {
-      background-color: #c48d8d;
+    .dropdown-menu li {
+      padding: 10px 15px;
       color: white;
     }
 
+    .dropdown-menu li a,
+    .dropdown-menu li button {
+      color: white;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .dropdown-menu li:hover {
+      background-color: #333;
+    }
+
+    .user-menu:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #000;
+      padding: 10px 20px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .nav-list li {
+      margin: 5px 10px;
+    }
+
+    .nav-list a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-list input[type="text"] {
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .nav-list button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      border: none;
+      background-color: black;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Products section */
+    .products {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    /* Chat */
     .chat-container {
-      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
-      background-color: #f9f9f9;
+      overflow: hidden;
     }
 
     .chat-header {
@@ -74,6 +142,7 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
+      height: 400px;
     }
 
     .message {
@@ -101,6 +170,7 @@
       padding: 10px 15px;
       display: flex;
       align-items: center;
+      background-color: #fff;
     }
 
     .chat-input input {
@@ -121,40 +191,45 @@
       cursor: pointer;
     }
 
+    /* Footer */
+    .footer {
+      background: linear-gradient(to right, #131313, #131313);
+      padding: 40px 20px;
+      width: 100%;
+      color: white;
+    }
   </style>
 </head>
+
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <img src="" alt="avatar">
-    {{-- <div class="name">{{ Auth::user()->name }}</div> --}}
-    <a href="#">Thông tin cá nhân</a>
-    <a href="#">Đơn mua</a>
-    <a href="#" class="active">Nhắn tin với shop</a>
-    <a href="#">Mục yêu thích</a>
-    <a href="#">Đăng xuất</a>
-  </div>
+  @include('outside.navbar-index')
 
-  <!-- Main Chat Area -->
-  <div class="chat-container">
-    <div class="chat-header">
-      ← Trở Về
-      <span>Nhắn tin với shop</span>
+  <section class="products container mt-5">
+    <h2>Nhắn tin với shop</h2>
+
+    <div class="chat-container mt-4">
+      <div class="chat-header">
+        ← Trở Về
+        <span>Nhắn tin với shop</span>
+      </div>
+
+      <div class="chat-box">
+        @foreach ($messages as $msg)
+      <div class="message {{ $msg->sender_id === auth()->id() ? 'from-customer' : 'from-shop' }}">
+        {{ $msg->message }}
+      </div>
+    @endforeach
+      </div>
+
+      <form action="{{ route('chat.customer.send') }}" method="POST" class="chat-input">
+        @csrf
+        <input type="text" name="message" placeholder="Hãy gửi tôi tin nhắn bạn tại đây..." required>
+        <button type="submit">Gửi</button>
+      </form>
     </div>
+  </section>
 
-    <div class="chat-box">
-      @foreach ($messages as $msg)
-        <div class="message {{ $msg->sender_id === auth()->id() ? 'from-customer' : 'from-shop' }}">
-          {{ $msg->message }}
-        </div>
-      @endforeach
-    </div>
-
-    <form action="{{ route('chat.customer.send') }}" method="POST" class="chat-input">
-      @csrf
-      <input type="text" name="message" placeholder="Hãy gửi tôi tin nhắn bạn tại đây..." required>
-      <button type="submit">Gửi</button>
-    </form>
-  </div>
+  @include('outside.footer-user')
 </body>
+
 </html>

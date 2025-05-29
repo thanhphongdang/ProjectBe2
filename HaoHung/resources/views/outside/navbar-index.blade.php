@@ -8,6 +8,7 @@
     <li><a href="{{ route('map') }}">Map</a></li>
     <li><a href="#">Customer Support</a></li>
     <li><a href="#">Introduce</a></li>
+     <li><a href="{{ route('chat.customer') }}">Chat</a></li>
     <li>
       <input type="text" placeholder="Search...">
       <button>🔍</button>

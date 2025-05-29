@@ -363,11 +363,16 @@ class CRUDController extends Controller
 
         return back()->with('success', 'Ảnh đại diện đã được cập nhật.');
     }
-    
+
     public function header()
-{
-    return view('outside.header');
-}
+    {
+        return view('outside.header');
+    }
+    
+
+    public function loginAdmin(){
+        return view('desgin.login-admin');
+    }
 
 
 }
