@@ -4,14 +4,13 @@
     <li><a href="{{route('product')}}">Home</a></li>
     <li><a href="#">Categories</a></li>
     <li><a href="{{ route('makeappointment') }}">Make an Appointment</a></li>
-    <li><a href="#">Shopping Cart</a></li>
     <li><a href="{{ route('map') }}">Map</a></li>
     <li><a href="#">Customer Support</a></li>
     <li><a href="#">Tax calculation</a></li>
     <li><a href="{{ route('chat.customer') }}">Chat</a></li>
     <li>
     <a href="{{ route('cart.view') }}">
-        🛒 Giỏ hàng 
+        🛒 Shopping Cart
         ({{ \App\Models\Cart::where('ID_Customer', auth()->id())->sum('Quantity') }})
     </a>
 </li>

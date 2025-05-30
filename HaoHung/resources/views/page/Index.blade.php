@@ -326,7 +326,29 @@
 
         setInterval(() => { changeSlide(1); }, 5000);
     </script>
+    
 
+    @if (session('success'))
+        <div class="toast-container position-fixed top-50 start-50 translate-middle p-3">
+            <div class="toast align-items-center text-bg-success border-0 show" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            toastElList.forEach(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl, { delay: 1000 });
+                toast.show();
+            });
+        });
+    </script>
 </body>
 
 </html>

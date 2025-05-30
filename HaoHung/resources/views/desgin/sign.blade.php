@@ -49,12 +49,14 @@
       @csrf
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Full Name</label>
-        <input type="text" name="name" class="form-control" maxlength="30"
-          placeholder="Enter your full name" required>
+        <input type="text" name="name" class="form-control" maxlength="30" placeholder="Enter your full name" required>
+        @error('name')
+      <small class="text-danger">Bat Buoc Phai nhap</small>
+    @enderror
       </div>
       <div class="mb-3 text-start">
         <label class="form-label fst-italic">Email</label>
-        <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength
           placeholder="Enter your email" required>
       </div>
       <div class="mb-3 text-start">

@@ -54,11 +54,11 @@ class CRUDController extends Controller
                     ->with('email', $user['email'])
                     ->with('image', $user['image']);
             } else {
-                return redirect('Index')->withSuccess('Signed in as user');
+                return redirect('Index')->with('success','Login are not success');
             }
         }
 
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect("login")->with('error','Login are not success');
 
     }
     /**

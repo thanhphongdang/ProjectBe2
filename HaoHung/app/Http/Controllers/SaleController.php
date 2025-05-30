@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Sale;
 class SaleController extends Controller
 {
-     public function postAdd(Request $request)
+    public function postAdd(Request $request)
     {
         $request->validate([
             'Name_Sale' => 'required',
@@ -24,20 +24,29 @@ class SaleController extends Controller
         ]);
         return redirect('voucher');
     }
-     public function sale_list() {
+    public function sale_list()
+    {
         $sales = Sale::all();
-        return view('page.voucher', ["sales"=> $sales]);
+        return view('page.voucher', ["sales" => $sales]);
     }
-     public function index()
+    public function index()
     {
         $sales = Sale::all();
         return view('page.add-vouncher', compact('sales'));
     }
-    public function deleteSale(Request $request) {
-        $id = $request->get('id');
-        $sale = Sale::destroy($id);
+    public function deleteSale(Request $request, $id)
+    {
+        // $id = $request->get('id');
 
-        return redirect("voucher")->withSuccess('You have signed-in');
+        $sale = Sale::find($id);
+
+        if (!$sale) {
+            return redirect('voucher')->with('error', 'Không tìm thấy Voucher để xóa.');
+        }
+
+        $sale->delete();
+
+        return redirect('voucher')->with('success', 'Bạn đã xóa Voucher thành công.');
     }
 
     /**
@@ -50,7 +59,7 @@ class SaleController extends Controller
 
         return view('page.edit-sale', ['sales' => $sale]);
     }
-     public function postUpdateSale(Request $request)
+    public function postUpdateSale(Request $request)
     {
         $input = $request->all();
 
@@ -61,12 +70,12 @@ class SaleController extends Controller
             'description' => 'required',
         ]);
 
-       $sale = Sale::find($input['id']);
-       $sale->Name_Sale = $input['Name_Sale'];
-       $sale->Code_Voucher = $input['Code_Voucher'];
-       $sale->Moneny = $input['Moneny'];
-       $sale->description = $input['description'];
-       $sale->save();
+        $sale = Sale::find($input['id']);
+        $sale->Name_Sale = $input['Name_Sale'];
+        $sale->Code_Voucher = $input['Code_Voucher'];
+        $sale->Moneny = $input['Moneny'];
+        $sale->description = $input['description'];
+        $sale->save();
 
         return redirect("voucher")->with('success', 'Add suddessfully !');
     }

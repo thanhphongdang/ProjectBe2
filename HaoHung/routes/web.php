@@ -99,7 +99,7 @@ Route::get('tax/{id}', [WarehouseController::class, 'showTax'])->name('tax');
 Route::get('voucher', [SaleController::class, 'sale_List'])->name('sale.list');
 Route::get('add-voucher', [SaleController::class, 'index'])->name('list.get');
 Route::post('QLMaGiamGia', [SaleController::class, 'postAdd'])->name('PostQLMaGiamGia');
-Route::get('sale-delete', [SaleController::class, 'deleteSale'])->name('sale.deleteSale');
+Route::get('voucher/{id}', [SaleController::class, 'deleteSale'])->name('sale.deleteSale');
 
 Route::get('edit', [SaleController::class, 'updateSale'])->name('update.sale');
 Route::post('edit', [SaleController::class, 'postUpdateSale'])->name('sale.postUpdateSale');
@@ -186,4 +186,16 @@ Route::get('page/add-comments', [CommentsController::class, 'listProductsComment
 Route::get('/comments', [CommentsController::class, 'ListAdminComment'])->name('page.list-comments');
 
 Route::delete('/list-comments/{id}', [CommentsController::class, 'destroy'])->name('comments.destroy');
+
+//Pay  QR
+use App\Http\Controllers\PaymentController;
+
+Route::get('/payment', [PaymentController::class, 'form']);
+Route::post('/payment', [PaymentController::class, 'generateQR']);
+
+Route::get('/payment/QR', function () {
+    return view('page.QR-code');
+});
+
+
 
