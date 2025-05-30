@@ -269,8 +269,7 @@
                             <img src="{{ asset('image/' . $product->Image) }}" alt="{{ $product->name_Car }}">
                             <h3>{{ $product->Name_Car }}</h3>
                             <p>{{ $product->Car_Company }}</p>
-                            <p>Price: {{ $product->Price }}</p>
-                            <p>Information: {{ $product->information }}</p>
+                            <p>Price: {{number_format($product->Price) }} VND</p>
                             <p>Origin: {{ $product->Countries }}</p>
                             <div>
                                 <button>View</button>

@@ -201,3 +201,5 @@ Route::get('/payment/QR', function () {
 Route::post('post_datlichxemxe', [MakeAnAppointmentController::class,'postAdd'])->name('post.datlichxemxe');
 Route::get('datlichxemxe', [MakeAnAppointmentController::class,'showForm'])->name('user.datlichxemxe');
 
+//Search
+Route::get('search', [ProductController::class,'search'])->name('user.search');

@@ -51,7 +51,7 @@
                         <div class="content">
                             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                                 <div>
-                                    <h1>ADD PRODUCT</h1>
+                                    <h1>ADD WareHouse</h1>
                                     <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
                                         <span><i class="mdi mdi-chevron-right"></i></span>PRODUCT
                                     </p>
@@ -61,7 +61,7 @@
                                 <div class="col-12">
                                     <div class="card card-default">
                                         <div class="card-header card-header-border-bottom">
-                                            <h2>ADD Product</h2>
+                                            <h2>ADD WareHouse</h2>
                                         </div>
 
                                         <div class="card-body">
@@ -75,7 +75,8 @@
                                                                 <label for="inputEmail4" class="form-label">Name</label>
                                                                 <input type="text" name="Name_Car"
                                                                     class="form-control slug-title" placeholder="Name Car"
-                                                                    id="Name_Car">
+                                                                    id="Name_Car" maxlength="50" minlength="2">
+                                                                    
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label">Company</label>
@@ -108,7 +109,7 @@
                                                                 <label for="inputEmail5" class="form-label">Price</label>
                                                                 <input type="price" name="Price"
                                                                     class="form-control slug-title" placeholder="Price"
-                                                                    id="Price">
+                                                                    id="Price" maxlength="12" minlength="3" >
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Image</label>
@@ -120,12 +121,12 @@
                                                                 <label for="inputEmail5" class="form-label">Quantity</label>
                                                                 <input type="number" name="Quantity"
                                                                     class="form-control slug-title" placeholder="Quantity"
-                                                                    id="Quantity">
+                                                                    id="Quantity" maxlength="3" minlength="1">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label class="form-label">Information</label>
                                                                 <textarea class="form-control" name="information"
-                                                                    id="information" rows="4"></textarea>
+                                                                    id="information" rows="2" ></textarea>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="product_add_cancel_button">

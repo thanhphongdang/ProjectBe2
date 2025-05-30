@@ -23,11 +23,15 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+         return [
+            'name' => $this->faker->name(),
+            'address' => $this->faker->address(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'image' => '1747145797_Porsche933.jpg', // bạn có thể random hoặc để mặc định
+            'role' => 0,
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('Haohung@081025'), // mật khẩu mặc định
             'remember_token' => Str::random(10),
         ];
     }

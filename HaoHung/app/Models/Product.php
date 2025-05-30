@@ -4,10 +4,13 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\Translation\Dumper\JsonFileDumper;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Product extends Model
 {
     //
+     use HasFactory;
     protected $fillable = [
         'ID_Car',
         'Image',

@@ -8,16 +8,18 @@
     <li><a href="#">Tax calculation</a></li>
     <li><a href="{{ route('chat.customer') }}">Chat</a></li>
     <li>
-    <a href="{{ route('cart.view') }}">
+      <a href="{{ route('cart.view') }}">
         🛒 Shopping Cart
         ({{ \App\Models\Cart::where('ID_Customer', auth()->id())->sum('Quantity') }})
-    </a>
-</li>
+      </a>
+    </li>
 
     </li>
     <li>
-      <input type="text" placeholder="Search...">
-      <button>🔍</button>
+      <form action="{{ route('user.search') }}" method="GET">
+        <input type="text" name="query" placeholder="Search..." value="{{ request('query') }}">
+        <button type="submit">🔍</button>
+      </form>
     </li>
     @auth
     <!-- User Account -->

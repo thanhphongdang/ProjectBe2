@@ -181,5 +181,15 @@ class ProductController extends Controller
         return redirect("list-product")->with('success', 'Bạn đã xóa sản phẩm thành công');
     }
 
+     public function search(Request $request)
+    {
+          $query = $request->input('query');
 
+    $products = Product::where('Name_Car', 'like', '%' . $query . '%')->get();
+
+    return view('page.Index', [
+        'products' => $products,
+        'query' => $query
+    ]);
+    }
 }

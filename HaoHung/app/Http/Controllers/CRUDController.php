@@ -54,11 +54,11 @@ class CRUDController extends Controller
                     ->with('email', $user['email'])
                     ->with('image', $user['image']);
             } else {
-                return redirect('Index')->with('success','Login are not success');
+                return redirect('Index')->with('success', 'Login are success');
             }
         }
 
-        return redirect("login")->with('error','Login are not success');
+        return redirect("login")->with('error', 'Login are not success');
 
     }
     /**
@@ -162,10 +162,26 @@ class CRUDController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $input['id'],
+            'phone' => 'nullable|unique:users,phone,' . $input['id'],
+            'address' => 'nullable|unique:users,address,' . $input['id'],
             'password' => 'nullable|min:6',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'updated_at' => 'required',
         ]);
+
+        $duplicates = \App\Models\User::where('id', '!=', $input['id'])
+            ->where(function ($query) use ($input) {
+                $query->where('email', $input['email'])
+                    ->orWhere('phone', $input['phone'])
+                    ->orWhere('address', $input['address']);
+            })
+            ->first();
+
+        if ($duplicates) {
+            if ($duplicates->email === $input['email']) {
+                return redirect()->back()->withInput()->with('error', 'Email đã được sử dụng bởi người dùng khác.');
+            }
+        }
 
         $user = User::find($input['id']);
 
@@ -173,6 +189,7 @@ class CRUDController extends Controller
         if ($user->updated_at->toDateTimeString() !== $input['updated_at']) {
             return redirect()->back()->with('error', 'Thông tin người dùng đã bị thay đổi ở nơi khác. Vui lòng tải lại trang trước khi chỉnh sửa.');
         }
+
 
         // Xử lý ảnh nếu có
         if ($request->hasFile('image')) {

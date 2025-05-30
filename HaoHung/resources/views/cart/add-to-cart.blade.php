@@ -288,7 +288,7 @@
                             <tr>
                                 <td><img src="{{ asset('image/' . $item->Image) }}" alt="Xe"></td>
                                 <td>{{ $item->Name_Car }}</td>
-                                <td>{{ number_format($item->Price, 0, ',', '.') }} VND</td>
+                                <td>{{ number_format($item->product->Price) }} VND</td>
                                 <td>{{ $item->Quantity }}</td>
                                 <td>
                                     <select class="form-select">

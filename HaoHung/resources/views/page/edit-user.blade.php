@@ -65,7 +65,7 @@
                                 <div class="col-12">
                                     <div class="card card-default">
                                         <div class="card-header card-header-border-bottom">
-                                            <h2>Update Customer</h2>
+                                            <h2>Update User</h2>
                                         </div>
                                         <form class="row g-3" action="{{ route('post.update') }}" method="post"
                                             enctype="multipart/form-data">
@@ -92,6 +92,10 @@
                                                                     class="form-control slug-title"
                                                                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                                                     placeholder="Email" id="email" value="{{$user->email}}">
+                                                                @error('email')
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
+
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Address</label>
@@ -105,6 +109,9 @@
                                                                 <input type="phone" name="phone"
                                                                     class="form-control slug-title" maxlength="10"
                                                                     placeholder="Phone" id="phone" value="{{$user->phone}}">
+                                                                      @error('phone')
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputEmail5" class="form-label">Image</label>
@@ -211,6 +218,15 @@
             var toastElList = [].slice.call(document.querySelectorAll('.toast'));
             toastElList.forEach(function (toastEl) {
                 var toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+                toast.show();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastElList = [].slice.call(document.querySelectorAll('.alert'));
+            toastElList.forEach(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl, { delay: 800 });
                 toast.show();
             });
         });
