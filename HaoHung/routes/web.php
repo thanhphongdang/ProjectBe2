@@ -197,5 +197,7 @@ Route::get('/payment/QR', function () {
     return view('page.QR-code');
 });
 
-
+//Trang Dat lich xem xe
+Route::post('post_datlichxemxe', [MakeAnAppointmentController::class,'postAdd'])->name('post.datlichxemxe');
+Route::get('datlichxemxe', [MakeAnAppointmentController::class,'showForm'])->name('user.datlichxemxe');
 

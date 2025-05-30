@@ -12,7 +12,7 @@ class StatisticController extends Controller
     {
 
         // 1. Đổi 'oders' thành 'orders'
-        $results = DB::table('oders as o')
+        $results = DB::table('oderes as o')
             ->join('products as p', 'o.ID_Product', '=', 'p.Id_Products')
             ->select(
                 'p.Name_Car', 

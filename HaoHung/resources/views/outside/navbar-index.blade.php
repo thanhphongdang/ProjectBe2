@@ -2,10 +2,9 @@
 <nav class="navbar">
   <ul class="nav-list">
     <li><a href="{{route('product')}}">Home</a></li>
-    <li><a href="#">Categories</a></li>
-    <li><a href="{{ route('makeappointment') }}">Make an Appointment</a></li>
+    <li><a href="{{ route('user.datlichxemxe') }}">Make an Appointment</a></li>
     <li><a href="{{ route('map') }}">Map</a></li>
-    <li><a href="#">Customer Support</a></li>
+    <li><a href="{{ route('makeappointment') }}">Vehicle Maintenance</a></li>
     <li><a href="#">Tax calculation</a></li>
     <li><a href="{{ route('chat.customer') }}">Chat</a></li>
     <li>
