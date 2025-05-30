@@ -56,7 +56,8 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 15px;
             text-align: center;
             vertical-align: middle;
@@ -291,11 +292,19 @@
                                 <td>{{ number_format($item->product->Price) }} VND</td>
                                 <td>{{ $item->Quantity }}</td>
                                 <td>
-                                    <select class="form-select">
-                                        <option>▼</option>
+                                    <select class="form-select sale-select" name="sale_id" data-item-id="{{ $item->id }}">
+                                        <option value="0" data-discount="0">Chọn mã giảm giá ▼</option>
+                                        @foreach($sales as $sale)
+                                            <option value="{{ $sale->id }}" data-discount="{{ $sale->Moneny }}">
+                                                {{ $sale->Code_Voucher }} - {{ number_format($sale->Moneny, 0, ',', '.') }} VND
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </td>
-                                <td>{{ number_format($item->Sum, 0, ',', '.') }} VND</td>
+                                <td class="total-after-sale" data-item-id="{{ $item->id }}"
+                                    data-original-sum="{{ $item->Sum }}">
+                                    {{ number_format($item->Sum, 0, ',', '.') }} VND
+                                </td>
                                 <td>
                                     <form action="{{ route('cart.delete', $item->id) }}" method="POST" style="display:inline;">
                                         @csrf
@@ -307,7 +316,8 @@
                         <tr>
                             <td colspan="5" class="text-end"><strong>Tổng cộng:</strong></td>
                             <td colspan="2">
-                                <strong>{{ number_format($cartItems->sum('Sum'), 0, ',', '.') }} VND</strong>
+                                <strong id="grand-total">{{ number_format($cartItems->sum('Sum'), 0, ',', '.') }}
+                                    VND</strong>
                             </td>
                         </tr>
                     </tbody>
@@ -318,7 +328,7 @@
                 </div>
             </div>
         @else
-             <div class="cart">
+            <div class="cart">
                 <table class="table">
                     <thead>
                         <tr>
@@ -391,6 +401,40 @@
     <script src="{{ asset('assets/js/date-range.js') }}"></script>
     <!-- custom js -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- tinh tien sale-->
+     <script>
+    document.querySelectorAll('.sale-select').forEach(select => {
+        select.addEventListener('change', function() {
+            const discount = parseInt(this.selectedOptions[0].dataset.discount) || 0;
+            const itemId = this.dataset.itemId;
+
+            // Lấy cell tổng tiền gốc của sản phẩm
+            const sumCell = document.querySelector(`.total-after-sale[data-item-id='${itemId}']`);
+            const originalSum = parseInt(sumCell.dataset.originalSum);
+
+            // Tính lại tổng sau khi trừ tiền giảm
+            let newSum = originalSum - discount;
+            if (newSum < 0) newSum = 0;
+
+            // Cập nhật cột tổng tiền sản phẩm
+            sumCell.textContent = newSum.toLocaleString('vi-VN') + ' VND';
+
+            // Cập nhật tổng tiền toàn giỏ
+            updateGrandTotal();
+        });
+    });
+
+    function updateGrandTotal() {
+        let total = 0;
+        document.querySelectorAll('.total-after-sale').forEach(cell => {
+            // Lấy số nguyên từ chuỗi dạng "1.234.567 VND"
+            let val = cell.textContent.replace(/[^\d]/g, '');
+            total += parseInt(val) || 0;
+        });
+
+        document.getElementById('grand-total').textContent = total.toLocaleString('vi-VN') + ' VND';
+    }
+</script>
 
 </body>
 

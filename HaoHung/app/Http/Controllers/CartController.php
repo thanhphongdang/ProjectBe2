@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Sale;
 class CartController extends Controller
 {
     //
@@ -38,9 +39,9 @@ class CartController extends Controller
     {
         //    $product = Product::where('id', 1)->first();
        $cartItems = Cart::with('product')->where('ID_Customer', auth()->id())->get();
+        $sales = Sale::all(); // Lấy tất cả mã giảm giá
 
-
-        return view('cart.add-to-cart', compact('cartItems'));
+        return view('cart.add-to-cart', compact('cartItems','sales'));
 
 
     }

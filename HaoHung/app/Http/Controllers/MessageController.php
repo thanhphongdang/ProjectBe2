@@ -12,14 +12,16 @@ class MessageController extends Controller
     //
     public function index()
     {
+        
         $userId = Auth::id();
-
+        
         $admin = User::where('role', 1)->first();
-
+        //  dd($admin);
         if (!$admin) {
+            
             abort(404, 'Admin user not found. Please create an admin user with role "admin".');
         }
-
+        // dd('ra ngoai');
         $messages = Message::where(function ($query) use ($userId, $admin) {
             $query->where('sender_id', $userId)->where('receiver_id', $admin->id);
         })->orWhere(function ($query) use ($userId, $admin) {
