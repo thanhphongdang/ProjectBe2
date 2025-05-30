@@ -173,6 +173,43 @@
 					<hr>
 				</li>
 
+				<li class="has-sub">
+					<a class="sidenav-item-link" href="javascript:void(0)">
+						<i class="mdi mdi-account-multiple-outline"></i>
+						<span class="nav-text">Comments</span> <b class="caret"></b>
+					</a>
+					<div class="collapse">
+						<ul class="sub-menu" id="users" data-parent="#sidebar-menu">
+							<li>
+								<a class="sidenav-item-link" href="{{ route('page.list-comments') }}">
+									<span class="nav-text">List Comments</span>
+								</a>
+								<a class="sidenav-item-link" href="{{ route('add-comments') }}">
+									<span class="nav-text">Add Comments</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<hr>
+				</li>
+				<li class="has-sub">
+					<a class="sidenav-item-link" href="javascript:void(0)">
+						<i class="mdi mdi-account-multiple-outline"></i>
+						<span class="nav-text">Statistic</span> <b class="caret"></b>
+					</a>
+					<div class="collapse">
+						<ul class="sub-menu" id="users" data-parent="#sidebar-menu">
+							<li>
+								<a class="sidenav-item-link" href="{{ route('page.statistic') }}">
+									<span class="nav-text">List Statistic</span>
+								</a>
+								
+							</li>
+						</ul>
+					</div>
+					<hr>
+				</li>
+
 				<!-- Invoice -->
 				<!-- <li class="has-sub">
 							<a class="sidenav-item-link" href="javascript:void(0)">

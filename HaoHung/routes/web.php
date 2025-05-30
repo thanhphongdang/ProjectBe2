@@ -16,6 +16,10 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerReviewsController;
 use App\Http\Controllers\OderController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetCodePasswordController;
+use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\CommentsController;
 
 
 Route::get('/', function () {
@@ -58,7 +62,12 @@ Route::post('add-user', [CRUDController::class, 'postAdd'])->name('post.add');
 Route::post('/logout', [CRUDController::class, 'destroy'])->name('logout');
 
 Route::get('forgetPassword', [CRUDController::class, 'ForgetPassword'])->name('forgetPassword.sign');
-Route::post('forgetPassword', [CRUDController::class, 'postUpdatePassword'])->name('user.postUpdatePassword');
+// Route::post('forgetPassword', [CRUDController::class, 'postUpdatePassword'])->name('user.postUpdatePassword');
+Route::get('OTP_password', [CRUDController::class, 'OTPEmails'])->name('OTP.sign');
+
+Route::post('forgetPassword', [ResetCodePasswordController::class, '__invoke'])->name('user.postUpdatePassword');
+//otp
+Route::post('OTP_password', [ForgotPasswordController::class, '__invoke'])->name('forgot.password.send');
 
 Route::post('updateimage', [CRUDController::class, 'updateAvatar'])->name('update.profile');
 // Route::get('admin', [CRUDController::class,'header'])->name('helo');
@@ -159,3 +168,21 @@ Route::delete('delete/{id}', [CustomerReviewsController::class, 'deleteCustomerR
 
 // require __DIR__.'/settings.php';
 // require __DIR__.'/auth.php';
+
+
+//bieu do 
+Route::get('/statistic', [StatisticController::class, 'showChart'])->name('page.statistic');
+
+
+//comment admin
+Route::get('add-comments',[CommentsController::class,'listProductsComment'])->name('add-comments'); 
+Route::post('comments.store', [CommentsController::class,'createComment'])->name('comments.store');
+// Cách 1: Sử dụng URL dễ nhớ
+Route::get('page/add-comments', [CommentsController::class, 'listProductsComment'])->name('page.add-comments');
+
+//list
+// Route::get('list-comments', [CommentsController::class, 'ListAdminComment'])->name('page.list-comments');
+Route::get('/comments', [CommentsController::class, 'ListAdminComment'])->name('page.list-comments');
+
+Route::delete('/list-comments/{id}', [CommentsController::class, 'destroy'])->name('comments.destroy');
+

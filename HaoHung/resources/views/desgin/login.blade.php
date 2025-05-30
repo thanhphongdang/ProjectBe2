@@ -61,7 +61,7 @@
         @error('password') <small>{{ $message }}</small>@enderror
       </div>
       <div class="mb-3 text-end">
-        <label class="form-label fst-italic"> <a href="{{ route('forgetPassword.sign') }} "
+        <label class="form-label fst-italic"> <a href="{{ route('OTP.sign') }} "
             style="text-decoration:none;">
             Forget Password ?
           </a></label>
@@ -77,6 +77,18 @@
     </a>
   </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  @if(session('capnhatthanhcong'))
+  <script>
+    Swal.fire({
+      title: 'Thành công!',
+      text: "{{ session('capnhatthanhcong') }}",
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+  </script>
+  @endif
  
 
 </body>

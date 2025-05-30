@@ -237,25 +237,33 @@
                     <label for="" class="form-label">Date Book</label>
                     <input type="date" name="Date_Book" class="form-control">
                 </div>
+                <!-- Chọn sản phẩm -->
                 <div class="mt-3">
-                    <label for="" class="form-label">ID Product</label>
-                    <input type="text" name="ID_Product" class="form-control">
+                    <label for="product_id" class="form-label">ID Product</label>
+                    <select class="form-control" name="ID_Product" id="product_id" required>
+                        <option value="">Chọn xe để đặt lịch</option>
+                        @foreach ($products as $product)
+                        <option value="{{ $product->Id_Products }}">{{ $product->Name_Car }}</option>
+                        @endforeach
+                    </select>
                 </div>
+
+                <!-- Chọn khách hàng -->
                 <div class="mt-3">
-                    <label for="" class="form-label">ID Customer</label>
-                    <input type="text" name="ID_Customer" class="form-control">
+                    <label for="customer_id" class="form-label">ID Customer</label>
+                    <select class="form-control" name="ID_Customer" id="customer_id" required>
+                        <option value="">Chọn tên khách hàng</option>
+                        @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <!-- <select>
-          <option disabled selected>-Select Your Vehicle Model-</option>
-          <option>Honda</option>
-          <option>Toyota</option>
-          <option>Ford</option>
-        </select> -->
+               
                 <button type="submit" class="mt-3">Apply Now</button>
                 @if(session('success'))
-                    <script>
-                        alert("{{ session('success') }}");
-                    </script>
+                <script>
+                    alert("{{ session('success') }}");
+                </script>
                 @endif
             </form>
         </div>

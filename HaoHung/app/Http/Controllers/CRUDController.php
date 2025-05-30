@@ -25,6 +25,12 @@ class CRUDController extends Controller
         return view('desgin.login');
     }
 
+
+    public function OTPEmails()
+    {
+        return view('desgin.OTP_password');
+    }
+
     /**
      * User submit form login
      */
@@ -329,7 +335,7 @@ class CRUDController extends Controller
 
     public function ForgetPassword()
     {
-        return view('page.forgetPassword');
+        return view('desgin.forgetPassword');
     }
 
 

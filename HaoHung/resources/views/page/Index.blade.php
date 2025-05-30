@@ -284,6 +284,14 @@
         </div>
     </section>
 
+     <!-- chat voi AI -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+        intent="WELCOME"
+        chat-title="ChatBox"
+        agent-id="a197d836-209a-4ff8-b1a4-643aacdd5ebf"
+        language-code="vi"></df-messenger>
+
     <!-- Footer -->
     @include('outside.footer-user')
 

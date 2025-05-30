@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MakeAnAppointment;
+use App\Models\Product;
+use App\Models\User;
 
 class MakeAnAppointmentController extends Controller
 {
@@ -19,8 +21,11 @@ class MakeAnAppointmentController extends Controller
         MakeAnAppointment::create($request->all());
         return redirect()->route('make.appointment')->with('success', 'Đặt lịch bảo dưỡng xe thành công!');
     }
-    public function Make_appointment()
+   public function Make_appointment()
     {
-        return view('page.make-appointment');
+        $products = Product::all();
+        $users = User::all();
+
+        return view('page.make-appointment', compact('products', 'users'));
     }
 }
