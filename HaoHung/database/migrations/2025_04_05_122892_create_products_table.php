@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreign('ID_Car')->references('id')->on('warehouses')->onDelete('cascade');
             $table->string('Name_Car');
             $table->string('Car_Company');
-            $table->decimal('Price');
+            $table->bigInteger('Price');
             $table->text('Information');
             $table->string('Image');
             $table->string('Countries');

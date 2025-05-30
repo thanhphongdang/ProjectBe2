@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 
 class makeAppoint extends Model
 {
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
@@ -21,4 +21,6 @@ class makeAppoint extends Model
         'Email',
         'Dealer',
     ];
+    protected $table = 'make_appoints';
+
 }
