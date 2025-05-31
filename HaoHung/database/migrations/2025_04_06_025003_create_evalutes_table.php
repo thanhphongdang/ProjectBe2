@@ -23,6 +23,7 @@ return new class extends Migration
             ->onUpdate('cascade');
             $table->timestamp('Evalute_Date')->useCurrent();
             $table->integer('Star');
+            $table->string('comment');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@
     <li><a href="{{ route('user.datlichxemxe') }}">Make an Appointment</a></li>
     <li><a href="{{ route('map') }}">Map</a></li>
     <li><a href="{{ route('makeappointment') }}">Vehicle Maintenance</a></li>
+     <li><a href="{{ route('page.Evalutes') }}">Product Reviews</a></li>
     <li><a href="#">Tax calculation</a></li>
     <li><a href="{{ route('chat.customer') }}">Chat</a></li>
     <li>

@@ -20,7 +20,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetCodePasswordController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\CommentsController;
-
+use App\Http\Controllers\EvaluteController;
 
 Route::get('/', function () {
     // return Inertia::render('welcome');
@@ -203,3 +203,14 @@ Route::get('datlichxemxe', [MakeAnAppointmentController::class,'showForm'])->nam
 
 //Search
 Route::get('search', [ProductController::class,'search'])->name('user.search');
+
+
+//đánh giá sản phẩm
+Route::get('Evalutes', [EvaluteController::class,'Evalutes'])->name('page.Evalutes');
+
+Route::get('/Evalutes', [EvaluteController::class,'listProduct_Customer'])->name('page.Evalutes');
+
+Route::post('/Evalutes', [EvaluteController::class,'store'])->name('createEvalutes');
+
+
+
